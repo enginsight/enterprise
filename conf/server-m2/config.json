@@ -1,0 +1,51 @@
+{
+    "database": {
+      "uriConnectionString": "mongodb://localhost:27017/enginsight"
+    },
+    "api": {
+      "port": 8080,
+      "timeout": 5000,
+      "cookies": {
+        "maxAge": 3600000,
+        "domain": "",
+        "path": "/",
+        "signed": false
+      },
+      "recaptcha": {
+        "secret": "",
+        "host": "www.google.com",
+        "path": "/recaptcha/api/siteverify",
+        "method": "POST"
+      },
+      "headers": {},
+      "jwt": {
+        "secret": "secret",
+        "expiresIn": "24h"
+      },
+      "app": {
+        "host": "http://localhost:4200"
+      },
+      "master": {
+        "organisation": "",
+        "accessKey": {
+          "id": "",
+          "secret": ""
+        }
+      }
+    },
+    "cache": {
+      "provider": "redis",
+      "uriConnectionString": ""
+    },
+    "email": {
+      "host": "",
+      "port": "",
+      "sslTls": true,
+      "user": "",
+      "pass": "",
+      "maxConnections": 2,
+      "rateDelta": 1000,
+      "rateLimit": 1
+    }
+  }
+  
