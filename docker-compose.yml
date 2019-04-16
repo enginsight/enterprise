@@ -11,7 +11,7 @@ services:
     - "./conf/ui-m1/environment.js:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: enginsightonpremise/server-m2:1.42.15
+    image: enginsightonpremise/server-m2:1.42.16
     networks:
     - redis
     ports:
