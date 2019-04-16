@@ -26,11 +26,17 @@ fi
 
 read -p 'Enter mongodb uri (e.g. mongodb://mongo1:27017,mongo2:27017,mongo3:27017/enginsight?replicaSet=ngs): ' MONGODB_URI
 if [ -z "$MONGODB_URI" ]; then
-  echo "we need mongo"
+  echo "We need a mongo uri."
   exit 1
 fi
 
 if [[ ! $MONGODB_URI == *"replicaSet"* ]] && [[ ! $MONGODB_URI == *"+srv"* ]]; then
+  exit 1
+fi
+
+read -p 'Enter your licence: '                              LICENCE
+if [ -z "$LICENCE" ]; then
+  echo "We need a licence."
   exit 1
 fi
 
@@ -42,6 +48,7 @@ read -p 'Enter jwt secret (default: *random*) : '           JWT_SECRET && JWT_SE
 
 for file in $(find ./conf/* -maxdepth 10 -name "*.js*")
 do
+    sed -i -e "s/%%LICENCE%%/$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
     sed -i -e "s/%%MONGODB_URI%%/$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
     sed -i -e "s/%%APP_URL%%/$(echo $APP_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
     sed -i -e "s/%%COOKIE_DOMAIN%%/$(echo $COOKIE_DOMAIN | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"

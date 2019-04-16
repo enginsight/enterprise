@@ -1,4 +1,10 @@
 {
+  "onpremise":{
+    "license": "%%LICENCE%%",
+    "twoFactor": {
+      "enabled": false
+    }
+  },
     "database": {
       "uriConnectionString": "%%MONGODB_URI%%"
     },
