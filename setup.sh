@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo ""
-echo "    █      Enginsight On-Premise Setup v1.0"
+echo "    █      Enginsight OnPremise Setup v1.0"
 echo "  █ █   █  "
 echo "  █ █ █ █  Enginsight GmbH"
 echo "  █ █ █ █  Hans-Knöll-Straße 6, 07745 Jena"
@@ -50,4 +50,7 @@ do
     sed -i -e "s/%%JWT_SECRET%%/$(echo $JWT_SECRET | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
 done
 
+echo ''   
+echo 'Starting initialization'
+echo ''
 docker-compose up

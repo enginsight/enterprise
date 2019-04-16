@@ -1,0 +1,20 @@
+{
+    "database": {
+      "uriConnectionString" : "%%MONGODB_URI%%%"
+    },
+  
+    "timeForNewModel": 21600,
+    "cache": "redis",
+    "sample_size": 1,
+    "batch": 1,
+    "horizon": 150,
+    "epochs": 100,
+    "plotting": false,
+    "testPercentage": 15,
+    "quantileNeg": 99,
+    "quantilePos": 99,
+    "interval": 5,
+    "fitNN": false,
+    "keepRedis":true
+  }
+  

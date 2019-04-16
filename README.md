@@ -11,8 +11,9 @@ Do you want more information regarding the OnPremise solution? Just visit [engin
 3. Operating system: (either)
     1. Ubuntu/Debian
     2. CentOS/Redhat/OpenSuse
-4. Create user at [Docker Hub](https://docs.docker.com/machine/install-machine/). 
-5. Enginsight Licence. Please contact hello@enginsight.com
+4. Create user at [Docker Hub](https://id.docker.com/login/). 
+5. [Docker-Compose](https://docs.docker.com/compose/install/)
+6. Enginsight Licence. Please contact hello@enginsight.com
 
 
 ## Installation

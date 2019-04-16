@@ -1,0 +1,33 @@
+{
+    "loopDelay": 15000,
+    "initDelay": 15000,
+    "database": {
+      "uriConnectionString": "%%MONGODB_URI%%"
+    },
+    "email": {
+      "host": "",
+      "port": "",
+      "sslTls": true,
+      "user": "",
+      "pass": "",
+      "maxConnections": 2,
+      "rateDelta": 1000,
+      "rateLimit": 1
+    },
+    "sms": {
+      "limit": 20,
+      "region": "",
+      "accessKeyId": "",
+      "secretAccessKey": "",
+      "senderId": ""
+    },
+    "app": {
+      "host": "%%APP_URL%%"
+    },
+    "cache": "%%REDIS_URI%%",
+    "telegram": {
+      "token": "",
+      "supportID": ""
+    }
+  }
+  

@@ -22,11 +22,80 @@ services:
     volumes:
     - "./conf/server-m2/config.json:/etc/enginsight/server-m2/config.json"
 
+  sentinel-m3:
+    image: enginsightonpremise/sentinel-m3:1.2.8
+    networks:
+    - redis
+    depends_on:
+    - redis
+    restart: always
+    volumes:
+    - "./conf/sentinel-m3/config.json:/etc/enginsight/sentinel-m3/config.json"
+
+  reporter-m4:
+    image: enginsightonpremise/reporter-m4:1.2.20
+    networks:
+    - redis
+    - mongodb-cves
+    depends_on:
+    - redis
+    - mongodb-cves
+    restart: always
+    volumes:
+    - "./conf/reporter-m4/config.json:/etc/enginsight/reporter-m4/config.json"
+
+  profiler-m22:
+    image: enginsightonpremise/profiler-m22:1.1.46
+    networks:
+    - redis
+    depends_on:
+    - redis
+    restart: always
+    volumes:
+    - "./conf/profiler-m22/config.json:/etc/enginsight/profiler-m22/config.json"
+
+  correspondent-m25:
+    image: enginsightonpremise/correspondent-m25:1.0.22
+    networks:
+    - redis
+    depends_on:
+    - redis
+    restart: always
+    volumes:
+    - "./conf/correspondent-m25/config.json:/etc/enginsight/correspondent-m25/config.json"
+
+  anomalies-m28:
+    image: enginsightonpremise/anomalies-m28:1.0.11
+    networks:
+    - redis
+    depends_on:
+    - redis
+    restart: always
+    volumes:
+    - "./conf/anomalies-m28/config.json:/etc/enginsight/anomalies-m28/config.json"
+
+  scheduler-m29:
+    image: enginsightonpremise/scheduler-m29:1.0.24
+    networks:
+    - redis
+    depends_on:
+    - redis
+    restart: always
+    volumes:
+    - "./conf/scheduler-m29/config.json:/etc/enginsight/scheduler-m29/config.json"
+
   redis:
-    image: redis
+    image: redis:4-alpine
     networks:
     - redis
     restart: always
 
+  mongodb-cves:
+    image: mongo:4
+    networks:
+    - mongodb-cves
+    restart: always
+
 networks:
   redis:
+  mongodb-cves:

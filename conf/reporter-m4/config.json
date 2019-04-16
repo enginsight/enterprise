@@ -1,0 +1,16 @@
+{
+    "database": {
+      "uriConnectionString": "%%MONGODB_URI%%"
+    },
+    "cves": {
+      "uriConnectionString": "mongodb://mongodb-cves/cves?authSource=admin"
+    },
+    "cache": {
+      "provider": "redis",
+      "uriConnectionString": "%%REDIS_URI%%"
+    },
+    "pdf": {
+      "zoom": 0.86
+    }
+  }
+  

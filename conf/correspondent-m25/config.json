@@ -1,0 +1,10 @@
+{
+    "database": {
+        "uriConnectionString": "%%MONGODB_URI%%"
+    },
+    "cache":{
+        "uriConnectionString": "%%REDIS_URI%%"
+    },
+    "zoom": 0.86
+}
+
