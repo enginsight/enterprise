@@ -5,8 +5,6 @@ module.exports = function (environment) {
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
-
-    stripePublishableKey: '',
     recaptchaKey: '',
 
     EmberENV: {
@@ -16,9 +14,12 @@ module.exports = function (environment) {
     APP: {}
   };
 
-  ENV.apiDomain = 'https://api.enginsight.com';
-  ENV.cookieDomain = '.enginsight.com';
-  ENV.stripePublishableKey = '';
+  ENV.apiDomain = '%%API_URL%%';
+  ENV.cookieDomain = '%%COOKIE_DOMAIN%%';
+
+  ENV.onpremise = {
+    version: 1
+  };
 
   return ENV;
 };

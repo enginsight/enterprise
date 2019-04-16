@@ -1,6 +1,6 @@
 {
     "database": {
-      "uriConnectionString": "mongodb://localhost:27017/enginsight"
+      "uriConnectionString": "%%MONGODB_URI%%"
     },
     "api": {
       "port": 8080,
@@ -19,11 +19,11 @@
       },
       "headers": {},
       "jwt": {
-        "secret": "secret",
+        "secret": "%%JWT_SECRET%%",
         "expiresIn": "24h"
       },
       "app": {
-        "host": "http://localhost:4200"
+        "host": "%%APP_URL%%"
       },
       "master": {
         "organisation": "",
@@ -35,7 +35,7 @@
     },
     "cache": {
       "provider": "redis",
-      "uriConnectionString": ""
+      "uriConnectionString": "%%REDIS_URI%%"
     },
     "email": {
       "host": "",
@@ -48,4 +48,3 @@
       "rateLimit": 1
     }
   }
-  
