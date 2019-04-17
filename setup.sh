@@ -81,10 +81,21 @@ if [ -z "$LICENCE" ]; then
 fi
 fi
 
-if [ ! "$APP_URL" ];       then read -p 'Enter app url (default: http://localhost) : '      APP_URL && APP_URL=${APP_URL:-http://localhost} fi
-if [ ! "$API_URL" ];       then read -p 'Enter api url (default: http://localhost:8080) : ' API_URL && API_URL=${API_URL:-http://localhost:8080} fi
-if [ ! "$COOKIE_DOMAIN" ]; then read -p 'Enter cookie domain (default: .localhost) : '      COOKIE_DOMAIN && COOKIE_DOMAIN=${COOKIE_DOMAIN:-.localhost} fi
-if [ ! "$REDIS_URI" ];     then read -p 'Enter redis uri (default: redis://redis:6379) : '  REDIS_URI && REDIS_URI=${REDIS_URI:-redis://redis:6379} fi
+if [ ! "$APP_URL" ]; then
+read -p 'Enter app url (default: http://localhost) : '      APP_URL && APP_URL=${APP_URL:-http://localhost}
+fi
+
+if [ ! "$API_URL" ]; then
+read -p 'Enter api url (default: http://localhost:8080) : ' API_URL && API_URL=${API_URL:-http://localhost:8080}
+fi
+
+if [ ! "$COOKIE_DOMAIN" ]; then
+read -p 'Enter cookie domain (default: .localhost) : '      COOKIE_DOMAIN && COOKIE_DOMAIN=${COOKIE_DOMAIN:-.localhost}
+fi
+
+if [ ! "$REDIS_URI" ]; then
+read -p 'Enter redis uri (default: redis://redis:6379) : '  REDIS_URI && REDIS_URI=${REDIS_URI:-redis://redis:6379}
+fi
 
 JWT_SECRET=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`
 
