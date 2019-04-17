@@ -24,6 +24,43 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
+MONGODB_URI=''
+REDIS_URI=''
+APP_URL=''
+API_URL=''
+LICENSE=''
+COOKIE_DOMAIN=''
+
+for i in "$@"
+do
+case $i in
+MONGODB_URI=*)
+    MONGODB_URI="${i##*=}"
+    shift # past argument=value
+    ;;
+REDIS_URI=*)
+    REDIS_URI="${i##*=}"
+    shift # past argument=value
+    ;;
+APP_URL=*)
+    APP_URL="${i##*=}"
+    shift # past argument=value
+    ;;
+API_URL=*)
+    API_URL="${i##*=}"
+    shift # past argument=value
+    ;;
+LICENSE=*)
+    LICENSE="${i##*=}"
+    shift # past argument=value
+    ;;
+COOKIE_DOMAIN=*)
+    COOKIE_DOMAIN="${i##*=}"
+    shift # past argument=value
+    ;;
+esac
+done
+
 if [ ! "$MONGODB_URI" ]; then
 read -p 'Enter mongodb uri (e.g. mongodb://mongo1:27017,mongo2:27017,mongo3:27017/enginsight?replicaSet=ngs): ' MONGODB_URI
 if [ -z "$MONGODB_URI" ]; then
