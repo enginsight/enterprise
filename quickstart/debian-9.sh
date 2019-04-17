@@ -42,4 +42,4 @@ cd enterprise
 echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
 #clear
-chmod +x ./setup.sh && (cd .; ./setup.sh)
+chmod +x ./setup.sh && (cd .; . ./setup.sh)
