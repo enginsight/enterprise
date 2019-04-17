@@ -62,9 +62,17 @@ fi
 
 JWT_SECRET=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`
 
+echo "Settings:"
+echo $MONGODB_URI
+echo $REDIS_URI
+echo $APP_URI
+echo $API_URI
+echo $COOKIE_DOMAIN
+echo $JWT_SECRET
+echo "-----------------"
+
 for file in $(find ./conf/* -maxdepth 10 -name "*.js|*.json")
 do
-    cat $file | sed -e "s/%%LICENCE%%/$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
     cat $file | sed -e "s/%%LICENCE%%/$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
     cat $file | sed -e "s/%%MONGODB_URI%%/$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
     cat $file | sed -e "s/%%APP_URL%%/$(echo $APP_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
