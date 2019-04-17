@@ -62,22 +62,11 @@ fi
 
 JWT_SECRET=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`
 
-ip4=$(hostname -I | cut -f1 -d ' ')
-
-if [ ! "$API_URL" ] || [ -z "$API_URL" ]; then
-API_URL='http://$ip4:8080'
-fi
-
-if [ ! "$APP_URL" ] || [ -z "$APP_URL" ]; then
-APP_URL='http://$ip4'
-COOKIE_DOMAIN=$ip4
-fi
-
 echo "Settings:"
 echo $MONGODB_URI
 echo $REDIS_URI
-echo $APP_URI
-echo $API_URI
+echo $APP_URL
+echo $API_URL
 echo $COOKIE_DOMAIN
 echo $JWT_SECRET
 echo "-----------------"
