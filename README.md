@@ -79,7 +79,7 @@ If you have any questions regarding the installation feel free to contact us at 
 ## System Requirements
 Please make sure your machine has the following configurations:
 
-**Minimum requirement:** dual core processor with 4GB RAM
+**Minimum requirement:** Dual core processor with 4GB RAM
 
 **Recommended configurations:** Quad core processor with 8GB RAM
 
