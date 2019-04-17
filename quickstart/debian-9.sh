@@ -74,7 +74,7 @@ git clone https://github.com/enginsight/enterprise
 cd enterprise
 
 #clear
-docker login
+echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
 
 #clear
 chmod +x ./setup.sh
