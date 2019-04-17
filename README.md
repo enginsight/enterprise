@@ -1,6 +1,6 @@
-# Enginsight OnPremise 
+# Enginsight Enterprise 
 
-Do you want more information regarding the OnPremise solution? Just visit [enginsight.com](https://enginsight.com/enterprise/).
+Do you want more information regarding the Enterprise solution? Just visit [enginsight.com](https://enginsight.com/enterprise/).
 
 ## Prerequisits
 
@@ -17,23 +17,27 @@ Do you want more information regarding the OnPremise solution? Just visit [engin
 
 
 ## Installation
-We are glad that security and availability of your IT are important to you as well. With Enginsight you can monitor all components of your IT environment with ease. With Enginsight OnPremise it is also possible to operate the platform on your own servers. 
-With the fast and easy installation, using Docker, you can get access to any functions of Enginsight right on a server in your IT environment. Just follow the three steps to install Enginsight on your server.
+Worried about the security of your infrastructure? Having troubles monitoring your systems round the clock? Well, no more, sit back while Enginsight does this for you. 
+The Enterprise solution is here, the magical potion to your plight. You can operate the platform on your very own servers. A fast and easy installation process built upon Docker, 
+access all Enginsight functions remotely on your server. 
 
-1. The first step (if you haven’t already) is to install Docker. For this just follow the instructions of the [Docker installation guide](https://docs.docker.com/machine/install-machine/).
-2. After you have successfully installed Docker you are able to login, so that you can access our Docker containers. To login just execute the following line of code, entering your username and password.\
-```docker login ```\
-Please contact hello@enginsight.com for licence and docker credentials. If everything went right, you should have gotten a mail with the credentials if you decided for an OnPremise use of Enginsight.
+The three spells to get the magic in your hands and Enginsight in your servers - 
+
+1. The first (if you haven’t already) install Docker. Follow the instructions from the [Docker installation guide](https://docs.docker.com/machine/install-machine/).
+2. After successful installation login to access your Docker Containers. Execute the following code, with your username and password.\
+```docker login <username> <password>```\
+   Please contact hello@enginsight.com for license and docker credentials. You should have received an e-mail with the credentials if you opted for the Enterprise solution of Enginsight.
 
 3. Clone repository: ```git clone https://github.com/enginsight/on-premise.git && cd on-premise```
 
-4. Start setup:  ```chmod +x ./setup.sh && ./setup.sh```
+   -------------------------------------------------------------------------------------------------------------------
 
-5. Update paths using the console and following the directions of setup.sh
+1. To Start setup:  ```chmod +x ./setup.sh && ./setup.sh```
 
-6. To run as service: ```docker-compose up -d```
+2. Update paths from the console and follow setup.sh for directions
 
-And that's it. After all containers are downloaded and up running, which can take several minutes, you can use Enginsight on your own server just as you are used to, using the Enginsight web application. 
+3. To run as service: ```docker-compose up -d```
+It might take several minutes for all the containers to be downloaded, and be up and running, 
 
-If you have any questions regarding the installation feel free to contact us at support@enginsight.com. We are always happy to help, if you got any problems.
-
+And Voila!!! You can use Enginsight on your own server exactly like the Enginsight web application. 
+If you have any questions regarding the installation feel free to contact us at support@enginsight.com. Our communication channels are always open to your questions and concerns.

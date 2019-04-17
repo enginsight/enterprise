@@ -53,13 +53,14 @@ JWT_SECRET=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`
 
 for file in $(find ./conf/* -maxdepth 10 -name "*.js*")
 do
-    sed -i -e "s/%%LICENCE%%/$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
-    sed -i -e "s/%%MONGODB_URI%%/$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
-    sed -i -e "s/%%APP_URL%%/$(echo $APP_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
-    sed -i -e "s/%%COOKIE_DOMAIN%%/$(echo $COOKIE_DOMAIN | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
-    sed -i -e "s/%%API_URL%%/$(echo $API_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
-    sed -i -e "s/%%REDIS_URI%%/$(echo $REDIS_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
-    sed -i -e "s/%%JWT_SECRET%%/$(echo $JWT_SECRET | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
+    cat $file | sed -i -e "s/%%LICENCE%%/$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
+    cat $file | sed -i -e "s/%%LICENCE%%/$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
+    cat $file | sed -i -e "s/%%MONGODB_URI%%/$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
+    cat $file | sed -i -e "s/%%APP_URL%%/$(echo $APP_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
+    cat $file | sed -i -e "s/%%COOKIE_DOMAIN%%/$(echo $COOKIE_DOMAIN | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
+    cat $file | sed -i -e "s/%%API_URL%%/$(echo $API_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
+    cat $file | sed -i -e "s/%%REDIS_URI%%/$(echo $REDIS_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
+    cat $file | sed -i -e "s/%%JWT_SECRET%%/$(echo $JWT_SECRET | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" > $file.production
 done
 
 echo ''
