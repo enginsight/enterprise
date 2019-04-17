@@ -7,8 +7,9 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 
 ## Prerequisits
 1. MongoDB replica set
-    1. [cloud](https://www.mongodb.com/cloud)
-    2. [self hosted](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/)
+    1. [MongoDB Cloud Services](https://www.mongodb.com/cloud) free version is enough for testing purposes.
+    2. [Self hosted](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/)
+    **_It is strongly recommended to have more than one instance in your Mogo Replica Set_.**
 2. Operating system: (either)
     1. Ubuntu/Debian
     2. CentOS/Redhat/OpenSuse
@@ -21,12 +22,12 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 ## Quick Start Guide (for testing purposes only)
 Follow the steps below for a short trial view and get the real experience. 
 1. Set the following credentials in your console.
-    1. ```export DOCKER_USERNAME=<docker hub username>```
+    1. ```console export DOCKER_USERNAME=<docker hub username>```
     2. ```export DOCKER_PASSWORD=<docker hub password>```
     3. ```export MONGODB_URI=<Mongo replica set uri>```
 2. Run command ```curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian-9.sh | sudo -E bash```
 
-**Please note: This version supports Debian 9 only. It is _strongly recommended to have more than one instance in your Mogo Replica Set_.**
+**Please note: This version supports Debian 9 only.**
 
 ## Installation
 The few spells to get the magic in your hands and Enginsight in your servers - 
@@ -40,7 +41,7 @@ The few spells to get the magic in your hands and Enginsight in your servers -
 
    -------------------------------------------------------------------------------------------------------------------
 
-1. To Start setup:  ```chmod +x ./setup.sh && ./setup.sh```
+1. To Start setup:  ```console chmod +x ./setup.sh && ./setup.sh```
 
 2. Update paths from the console and follow setup.sh for directions
 
