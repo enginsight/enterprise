@@ -3,19 +3,6 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-ip4=$(hostname -I | cut -f1 -d ' ')
-
-if [ ! "$API_URL" ] || [ -z "$API_URL" ]; then
-echo 1
-export API_URL='http://$ip4:8080'
-fi
-
-if [ ! "$APP_URL" ] || [ -z "$APP_URL" ]; then
-echo 2
-export APP_URL='http://$ip4'
-export COOKIE_DOMAIN=$ip4
-fi
-
 if [ ! "$MONGODB_URI" ]; then
   echo "We need a mongo uri"
   exit 1
@@ -42,4 +29,4 @@ cd enterprise
 echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
 #clear
-chmod +x ./setup.sh && (cd .; source ./setup.sh)
+chmod +x ./setup.sh && (cd .; ./setup.sh)
