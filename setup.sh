@@ -24,8 +24,6 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-echo '------------'
-echo $MONGODB_URI
 if [ ! "$MONGODB_URI" ]; then
 read -p 'Enter mongodb uri (e.g. mongodb://mongo1:27017,mongo2:27017,mongo3:27017/enginsight?replicaSet=ngs): ' MONGODB_URI
 if [ -z "$MONGODB_URI" ]; then
@@ -79,4 +77,5 @@ done
 echo ''
 echo 'Starting initialization'
 echo ''
+
 docker-compose up
