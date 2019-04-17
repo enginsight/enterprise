@@ -26,7 +26,7 @@ Follow the steps below for a short trial view and get the real experience.
     3. ```export MONGODB_URI=<Mongo replica set uri>```
 2. Run command ```curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian-9.sh | sudo -E bash```
 
-**Please note: This version supports Debian 9 only. It is _strongly recommended to have more than one instance in your Mogo Replica Set_.
+**Please note: This version supports Debian 9 only. It is _strongly recommended to have more than one instance in your Mogo Replica Set_.**
 
 ## Installation
 The few spells to get the magic in your hands and Enginsight in your servers - 
