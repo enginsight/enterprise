@@ -34,10 +34,10 @@ if ! [ -x "$(command -v docker-compose)" ]; then
 fi
 
 git clone https://github.com/enginsight/enterprise
-
+cd enterprise
 
 #clear
 echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
 #clear
-chmod +x ./setup.sh && (cd enginsight; ./setup.sh)
+chmod +x ./setup.sh && (cd .; ./setup.sh)
