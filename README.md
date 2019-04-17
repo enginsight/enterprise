@@ -1,3 +1,4 @@
+
 # Enginsight Enterprise 
 Worried about the security of your infrastructure? Having troubles monitoring your systems round the clock? Well, no more, sit back while Enginsight does this for you. 
 The Enterprise solution is here, the magical potion to your plight. You can operate the platform on your very own servers. A fast and easy installation process built upon Docker, 
@@ -5,10 +6,10 @@ access all Enginsight functions remotely on your server.
 
 For more information regarding the Enterprise solution? Visit [enginsight.com](https://enginsight.com/enterprise/).
 
-## Prerequisits
+## Prerequisites
 1. MongoDB replica set
     1. [MongoDB Cloud Services](https://www.mongodb.com/cloud) free version is enough for testing purposes.
-    2. [Self hosted](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/)
+    2. [Self-hosted](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/)
     **_It is strongly recommended to have more than one instance in your Mogo Replica Set_.**
 2. Operating system: (either)
     1. Ubuntu/Debian
@@ -22,34 +23,50 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 ## Quick Start Guide (for testing purposes only)
 Follow the steps below for a short trial view and get the real experience. 
 1. Set the following credentials in your console.
-
-    1. ```powershell export DOCKER_USERNAME=<docker hub username>```
-    ```powershell
+    ```bash
     export DOCKER_USERNAME=<docker hub username>
     ```
-    2. ```export DOCKER_PASSWORD=<docker hub password>```
-    3. ```export MONGODB_URI=<Mongo replica set uri>```
-2. Run command ```curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian-9.sh | sudo -E bash```
+    ```bash
+    export DOCKER_PASSWORD=<docker hub password>
+    ```
+    ```bash 
+    export MONGODB_URI=<Mongo replica set uri>
+    ```
+2. Run command  
+	```bash
+	curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian-9.sh | sudo -E 
+	```
 
-**Please note: This version supports Debian 9 only.**
+	**_Please note: This version supports Debian 9 only._**
 
 ## Installation
 The few spells to get the magic in your hands and Enginsight in your servers - 
 
 1. Install (if you haven’t already) the latest [Docker version](https://docs.docker.com/install/). Follow the instructions from the [Docker installation guide](https://docs.docker.com/machine/install-machine/).
-2. After successful installation login to access your Docker Containers. Execute the following code, with your username and password.\
-```docker login -u <username>```\
+2. After successful installation login to access your Docker Containers. Execute the following code, with your username and password.
+	```bash
+	docker login -u <username>
+	```
    Please contact hello@enginsight.com for license and docker credentials. You should have received an e-mail with the credentials if you opted for the Enterprise solution of Enginsight.
 3. Install [Docker-Compose](https://docs.docker.com/compose/install/)
-4. Clone repository: ```git clone https://github.com/enginsight/on-premise.git && cd on-premise```
+4. Clone repository: 
+	```bash 
+	git clone https://github.com/enginsight/on-premise.git && cd on-premise
+	```
 
    -------------------------------------------------------------------------------------------------------------------
 
-1. To Start setup:  ```console chmod +x ./setup.sh && ./setup.sh```
+6. To Start setup:  
+	```bash
+	chmod +x ./setup.sh && ./setup.sh
+	```
 
-2. Update paths from the console and follow setup.sh for directions
+7. Update paths from the console and follow setup.sh for directions
 
-3. To run as service: ```docker-compose up -d```
+8. To run as service: 
+	```bash 
+	docker-compose up -d
+	```
 It might take several minutes for all the containers to be downloaded, and be up and running, 
 
 And Voila!!! You can use Enginsight on your own server exactly like the Enginsight web application. 
