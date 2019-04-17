@@ -1,3 +1,8 @@
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit 1
+fi
+
 if ! [ -x "$(command -v docker)" ]; then
   	sudo apt update
 	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
