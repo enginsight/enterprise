@@ -6,11 +6,11 @@ fi
 ip4=$(hostname -I | cut -f1 -d ' ')
 
 if [ ! "$API_URL" ] || [ -z "$API_URL" ]; then
-export API_URL=http://$ip4:8080
+export API_URL="http://$ip4:8080"
 fi
 
 if [ ! "$APP_URL" ] || [ -z "$APP_URL" ]; then
-export APP_URL=http://$ip4
+export APP_URL="http://$ip4"
 export COOKIE_DOMAIN=$ip4
 fi
 
