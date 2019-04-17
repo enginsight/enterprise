@@ -26,13 +26,13 @@ Follow the steps below for a short trial of the real experience:
 
 1. Set the following credentials in your console.
     ```bash
-    export DOCKER_USERNAME=<docker hub username>
+    export DOCKER_USERNAME = <docker hub username>
     ```
     ```bash
-    export DOCKER_PASSWORD=<docker hub password>
+    export DOCKER_PASSWORD = <docker hub password>
     ```
     ```bash 
-    export MONGODB_URI=<Mongo replica set uri>
+    export MONGODB_URI = <Mongo replica set uri>
     ```
 2. Run command  
 	```bash
