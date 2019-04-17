@@ -71,16 +71,23 @@ echo $COOKIE_DOMAIN
 echo $JWT_SECRET
 echo "-----------------"
 
+LICENSE=$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
+MONGODB_URI=$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
+REDIS_URI=$(echo $REDIS_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
+APP_URL=$(echo $APP_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
+API_URL=$(echo $API_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
+JWT_SECRET=$(echo $JWT_SECRET | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
+
 for file in $(find ./conf/* -maxdepth 10 -name "*.js")
 do
     config=$(<$file)
-    config=`cat $file | sed -e "s/%%LICENCE%%/$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%MONGODB_URI%%/$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%APP_URL%%/$(echo $APP_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%COOKIE_DOMAIN%%/$(echo $COOKIE_DOMAIN | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%API_URL%%/$(echo $API_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%REDIS_URI%%/$(echo $REDIS_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%JWT_SECRET%%/$(echo $JWT_SECRET | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
+    config=`echo $config | sed -e "s/%%LICENCE%%/$LICENCE/g"`
+    config=`echo $config | sed -e "s/%%MONGODB_URI%%/$MONGODB_URI/g"`
+    config=`echo $config | sed -e "s/%%APP_URL%%/$APP_URL/g"`
+    config=`echo $config | sed -e "s/%%COOKIE_DOMAIN%%/$COOKIE_DOMAIN/g"`
+    config=`echo $config | sed -e "s/%%API_URL%%/$API_URL/g"`
+    config=`echo $config | sed -e "s/%%REDIS_URI%%/$REDIS_URI/g"`
+    config=`echo $config | sed -e "s/%%JWT_SECRET%%/$JWT_SECRET/g"`
 
     echo $config > $file.production
 done
@@ -88,13 +95,13 @@ done
 for file in $(find ./conf/* -maxdepth 10 -name "*.json")
 do
     config=$(<$file)
-    config=`cat $file | sed -e "s/%%LICENCE%%/$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%MONGODB_URI%%/$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%APP_URL%%/$(echo $APP_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%COOKIE_DOMAIN%%/$(echo $COOKIE_DOMAIN | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%API_URL%%/$(echo $API_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%REDIS_URI%%/$(echo $REDIS_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
-    config=`cat $file | sed -e "s/%%JWT_SECRET%%/$(echo $JWT_SECRET | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g"`
+    config=`echo $config | sed -e "s/%%LICENCE%%/$LICENCE/g"`
+    config=`echo $config | sed -e "s/%%MONGODB_URI%%/$MONGODB_URI/g"`
+    config=`echo $config | sed -e "s/%%APP_URL%%/$APP_URL/g"`
+    config=`echo $config | sed -e "s/%%COOKIE_DOMAIN%%/$COOKIE_DOMAIN/g"`
+    config=`echo $config | sed -e "s/%%API_URL%%/$API_URL/g"`
+    config=`echo $config | sed -e "s/%%REDIS_URI%%/$REDIS_URI/g"`
+    config=`echo $config | sed -e "s/%%JWT_SECRET%%/$JWT_SECRET/g"`
 
     echo $config > $file.production
 done
