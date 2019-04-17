@@ -21,7 +21,6 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 4. Enginsight License. Please contact hello@enginsight.com for a license.
 
 
-
 ## Quick Start Guide (for testing purposes only)
 Follow the steps below for a short trial of the real experience:
 
@@ -42,6 +41,8 @@ Follow the steps below for a short trial of the real experience:
 	```
 
 	**_Please note: This version supports Debian 9 only._**
+
+    You should now be able to run Enginsight Enterprise successfully. Follow the steps further below to be able to use the full version.
 
 ## Installation
 The few spells to get the magic in your hands and Enginsight in your servers: 
@@ -75,6 +76,35 @@ It might take several minutes for all the containers to be downloaded, and be up
 And Voila!!! You can use Enginsight on your own server exactly like the Enginsight web application. 
 If you have any questions regarding the installation feel free to contact us at support@enginsight.com. Our communication channels are always open to your questions and concerns.
 
+##System Requirements
+Please make sure your machine has the following configurations:
+
+**Minimum requirement:** dual core processor with 4GB RAM
+
+**Recommended configurations:** Quad core processor with 8GB RAM
+
 ## Update
+In order to update the Enginsight Stack:
+1. Route back to home directory
+    ```bash
+    cd enterprise
+    ```
+2. Refresh the code in the directory
+    ```bash
+    git pull -r
+    ```
+3. Stop and remove all your running containers. This command also removes any networks priorly created.
+    ```bash
+    docker-compose down
+    ```
+4. Build the refreshed containers again, recreate all containers even if the images haven't changed, Clean unused containers
+    ```bash
+    docker-compose up --force-recreate --remove-orphans
+    ```
 
 ## Change Config
+ 
+    ***_Note: All the ```.production``` files shall be overwritten. Please take a back up of all your files before making any changes_***
+
+1. run the setup.sh file again
+2. You shall be prompted once again to provide all the configuration details.
