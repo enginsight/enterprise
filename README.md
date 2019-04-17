@@ -76,7 +76,7 @@ It might take several minutes for all the containers to be downloaded, and be up
 And Voila!!! You can use Enginsight on your own server exactly like the Enginsight web application. 
 If you have any questions regarding the installation feel free to contact us at support@enginsight.com. Our communication channels are always open to your questions and concerns.
 
-##System Requirements
+## System Requirements
 Please make sure your machine has the following configurations:
 
 **Minimum requirement:** dual core processor with 4GB RAM
@@ -103,8 +103,8 @@ In order to update the Enginsight Stack:
     ```
 
 ## Change Config
- 
-    ***_Note: All the ```.production``` files shall be overwritten. Please take a back up of all your files before making any changes_***
+
+**_Note: All the ```.production``` files shall be overwritten. Please take a back up of all your files before making any changes_**
 
 1. run the setup.sh file again
 2. You shall be prompted once again to provide all the configuration details.
