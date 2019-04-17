@@ -25,7 +25,7 @@ The three spells to get the magic in your hands and Enginsight in your servers -
 
 1. The first (if you haven’t already) install Docker. Follow the instructions from the [Docker installation guide](https://docs.docker.com/machine/install-machine/).
 2. After successful installation login to access your Docker Containers. Execute the following code, with your username and password.\
-```docker login <username> <password>```\
+```docker login -u <username>```\
    Please contact hello@enginsight.com for license and docker credentials. You should have received an e-mail with the credentials if you opted for the Enterprise solution of Enginsight.
 
 3. Clone repository: ```git clone https://github.com/enginsight/on-premise.git && cd on-premise```
