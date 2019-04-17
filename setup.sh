@@ -110,4 +110,4 @@ echo ''
 echo 'Starting initialization'
 echo ''
 
-docker-compose up
+docker-compose up --force-recreate --remove-orphans
