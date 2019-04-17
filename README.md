@@ -22,7 +22,9 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 ## Quick Start Guide (for testing purposes only)
 Follow the steps below for a short trial view and get the real experience. 
 1. Set the following credentials in your console.
-    1. ```console export DOCKER_USERNAME=<docker hub username>```
+    1. ```console 
+    export DOCKER_USERNAME=<docker hub username>
+    ```
     2. ```export DOCKER_PASSWORD=<docker hub password>```
     3. ```export MONGODB_URI=<Mongo replica set uri>```
 2. Run command ```curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian-9.sh | sudo -E bash```
