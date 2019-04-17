@@ -10,6 +10,7 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 1. MongoDB replica set
     1. [MongoDB Cloud Services](https://www.mongodb.com/cloud) free version is enough for testing purposes.
     2. [Self-hosted](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/)
+    
     **_It is strongly recommended to have more than one instance in your Mogo Replica Set_.**
 2. Operating system: (either)
     1. Ubuntu/Debian
