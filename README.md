@@ -27,7 +27,7 @@ Follow the steps below for a short trial of the real experience:
 
 1. Set the following credentials in your console. 
 
-_These are your docker hub user credentials you created in the earlier steps._
+    _These are your docker hub user credentials you created in the earlier steps._
 
     ```bash
     export DOCKER_USERNAME=<docker hub username>
