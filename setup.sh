@@ -24,27 +24,32 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
+if [ ! "$MONGODB_URI" ]; then
 read -p 'Enter mongodb uri (e.g. mongodb://mongo1:27017,mongo2:27017,mongo3:27017/enginsight?replicaSet=ngs): ' MONGODB_URI
 if [ -z "$MONGODB_URI" ]; then
   echo "We need a mongo uri."
   exit 1
+fi
 fi
 
 if [[ ! $MONGODB_URI == *"replicaSet"* ]] && [[ ! $MONGODB_URI == *"+srv"* ]]; then
   exit 1
 fi
 
-read -p 'Enter your licence: '                              LICENCE
+if [ ! "$MONGODB_URI" ]; then
+read -p 'Enter your licence: ' LICENCE
 if [ -z "$LICENCE" ]; then
   echo "We need a licence."
   exit 1
 fi
+fi
 
-read -p 'Enter app url (default: http://localhost) : '      APP_URL && APP_URL=${APP_URL:-http://localhost}
-read -p 'Enter cookie domain (default: .localhost) : '      COOKIE_DOMAIN && COOKIE_DOMAIN=${COOKIE_DOMAIN:-.localhost}
-read -p 'Enter api url (default: http://localhost:8080) : ' API_URL && API_URL=${API_URL:-http://localhost:8080}
-read -p 'Enter redis uri (default: redis://redis:6379) : '  REDIS_URI && REDIS_URI=${REDIS_URI:-redis://redis:6379}
-read -p 'Enter jwt secret (default: *random*) : '           JWT_SECRET && JWT_SECRET=${JWT_SECRET:-`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`}
+if [ ! "$APP_URL" ];       then read -p 'Enter app url (default: http://localhost) : '      APP_URL && APP_URL=${APP_URL:-http://localhost} fi
+if [ ! "$API_URL" ];       then read -p 'Enter api url (default: http://localhost:8080) : ' API_URL && API_URL=${API_URL:-http://localhost:8080} fi
+if [ ! "$COOKIE_DOMAIN" ]; then read -p 'Enter cookie domain (default: .localhost) : '      COOKIE_DOMAIN && COOKIE_DOMAIN=${COOKIE_DOMAIN:-.localhost} fi
+if [ ! "$REDIS_URI" ];     then read -p 'Enter redis uri (default: redis://redis:6379) : '  REDIS_URI && REDIS_URI=${REDIS_URI:-redis://redis:6379} fi
+
+JWT_SECRET=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`
 
 for file in $(find ./conf/* -maxdepth 10 -name "*.js*")
 do
@@ -57,7 +62,7 @@ do
     sed -i -e "s/%%JWT_SECRET%%/$(echo $JWT_SECRET | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')/g" "$file"
 done
 
-echo ''   
+echo ''
 echo 'Starting initialization'
 echo ''
 docker-compose up
