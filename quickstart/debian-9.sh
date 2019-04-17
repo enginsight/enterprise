@@ -88,7 +88,7 @@ echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdi
 
 #clear
 chmod +x ./setup.sh
-echo $MONGODB_URI
+echo $(printf '%q' "$MONGODB_URI")
 cat ./setup.sh | bash -s \
   MONGODB_URI="$(printf '%q' "$MONGODB_URI")" \
   REDIS_URI="$(printf '%q' "$REDIS_URI")" \
