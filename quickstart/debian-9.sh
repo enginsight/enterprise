@@ -84,17 +84,15 @@ git clone https://github.com/enginsight/enterprise
 cd enterprise
 
 #clear
-echo $DOCKER_PASSWORD
-echo $DOCKER_USERNAME
 echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
 #clear
 chmod +x ./setup.sh
 echo $MONGODB_URI
 cat ./setup.sh | bash -s \
-  MONGODB_URI="$MONGODB_URI" \
-  REDIS_URI="$REDIS_URI" \
-  APP_URL="$APP_URL" \
-  API_URL="$API_URL" \
-  COOKIE_DOMAIN="$COOKIE_DOMAIN" \
-  LICENSE="$LICENSE"
+  MONGODB_URI="$(printf '%q' "$MONGODB_URI")" \
+  REDIS_URI="$(printf '%q' "$REDIS_URI")" \
+  APP_URL="$(printf '%q' "$APP_URL")" \
+  API_URL="$(printf '%q' "$API_URL")" \
+  COOKIE_DOMAIN="$(printf '%q' "$COOKIE_DOMAIN")" \
+  LICENSE="$(printf '%q' "$LICENSE")"
