@@ -42,7 +42,10 @@ done
 
 ip4=$(hostname -I | cut -f1 -d '')
 
-if [ ! "$API_URL" ]; then API_URL=http://$ip4:8080 fi
+if [ ! "$API_URL" ]; then
+API_URL=http://$ip4:8080
+fi
+
 if [ ! "$APP_URL" ]; then
 APP_URL=http://$ip4
 COOKIE_DOMAIN=$ip4
