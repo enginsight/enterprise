@@ -74,7 +74,8 @@ clear
 docker login
 
 clear
-chmod +x ./setup.sh && ./setup.sh -s \
+chmod +x ./setup.sh
+cat ./setup.sh | bash -s \
   MONGODB_URI=$MONGODB_URI \
   REDIS_URI=$REDIS_URI \
   APP_URL=$APP_URL \
