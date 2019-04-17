@@ -16,7 +16,8 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
     1. Ubuntu/Debian
     2. CentOS/Redhat/OpenSuse
 3. Create user at [Docker Hub](https://id.docker.com/login/). 
-    We ship our docker containers via the Docker Hub. We therefore require your Docker Hub profile details to ship the containers into your account. 
+    
+    _We ship our docker containers via the Docker Hub. We therefore require your Docker Hub profile details to ship the containers into your account._ 
 4. Enginsight License. Please contact hello@enginsight.com for a license.
 
 
@@ -24,7 +25,10 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 ## Quick Start Guide (for testing purposes only)
 Follow the steps below for a short trial of the real experience:
 
-1. Set the following credentials in your console. These are your docker hub user credentials you created in the earlier steps.
+1. Set the following credentials in your console. 
+
+_These are your docker hub user credentials you created in the earlier steps._
+
     ```bash
     export DOCKER_USERNAME=<docker hub username>
     
