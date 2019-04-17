@@ -73,10 +73,10 @@ fi
 git clone https://github.com/enginsight/enterprise
 cd enterprise
 
-clear
+#clear
 docker login
 
-clear
+#clear
 chmod +x ./setup.sh
 echo $MONGODB_URI
 cat ./setup.sh | bash -s \
