@@ -22,7 +22,9 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 ## Quick Start Guide (for testing purposes only)
 Follow the steps below for a short trial view and get the real experience. 
 1. Set the following credentials in your console.
-    1. ```console 
+
+    1. ```powershell export DOCKER_USERNAME=<docker hub username>```
+    ```powershell
     export DOCKER_USERNAME=<docker hub username>
     ```
     2. ```export DOCKER_PASSWORD=<docker hub password>```
