@@ -3,53 +3,6 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-DOCKER_USERNAME=''
-DOCKER_PASSWORD=''
-MONGODB_URI=''
-REDIS_URI=''
-APP_URL=''
-API_URL=''
-LICENSE=''
-COOKIE_DOMAIN=''
-
-for i in "$@"
-do
-case $i in
-DOCKER_USERNAME=*)
-    DOCKER_USERNAME="${i##*=}"
-    shift # past argument=value
-    ;;
-DOCKER_PASSWORD=*)
-    DOCKER_PASSWORD="${i##*=}"
-    shift # past argument=value
-    ;;
-MONGODB_URI=*)
-    MONGODB_URI="${i##*=}"
-    shift # past argument=value
-    ;;
-REDIS_URI=*)
-    REDIS_URI="${i##*=}"
-    shift # past argument=value
-    ;;
-APP_URL=*)
-    APP_URL="${i##*=}"
-    shift # past argument=value
-    ;;
-API_URL=*)
-    API_URL="${i##*=}"
-    shift # past argument=value
-    ;;
-LICENSE=*)
-    LICENSE="${i##*=}"
-    shift # past argument=value
-    ;;
-COOKIE_DOMAIN=*)
-    COOKIE_DOMAIN="${i##*=}"
-    shift # past argument=value
-    ;;
-esac
-done
-
 ip4=$(hostname -I | cut -f1 -d '')
 
 if [ ! "$API_URL" ]; then
@@ -87,12 +40,4 @@ cd enterprise
 echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
 #clear
-chmod +x ./setup.sh
-echo $(printf '%q' "$MONGODB_URI")
-cat ./setup.sh | bash -s \
-  MONGODB_URI="$(printf '%q' "$MONGODB_URI")" \
-  REDIS_URI="$(printf '%q' "$REDIS_URI")" \
-  APP_URL="$(printf '%q' "$APP_URL")" \
-  API_URL="$(printf '%q' "$API_URL")" \
-  COOKIE_DOMAIN="$(printf '%q' "$COOKIE_DOMAIN")" \
-  LICENSE="$(printf '%q' "$LICENSE")"
+chmod +x ./setup.sh && ./setup.sh
