@@ -3,6 +3,8 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
+DOCKER_USERNAME=''
+DOCKER_PASSWORD=''
 MONGODB_URI=''
 REDIS_URI=''
 APP_URL=''
@@ -13,6 +15,14 @@ COOKIE_DOMAIN=''
 for i in "$@"
 do
 case $i in
+DOCKER_USERNAME=*)
+    DOCKER_USERNAME="${i##*=}"
+    shift # past argument=value
+    ;;
+DOCKER_PASSWORD=*)
+    DOCKER_PASSWORD="${i##*=}"
+    shift # past argument=value
+    ;;
 MONGODB_URI=*)
     MONGODB_URI="${i##*=}"
     shift # past argument=value
