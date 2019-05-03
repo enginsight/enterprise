@@ -37,7 +37,7 @@ Follow the steps below for a short trial of the real experience:
     ```
 2. Run command  
 	```bash
-	curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian-9.sh | sudo -E 
+	curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian-9.sh | sudo -E bash
 	```
 
 	**_Please note: This version supports Debian 9 only._**
