@@ -33,7 +33,7 @@ services:
     - "./conf/sentinel-m3/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: enginsightonpremise/reporter-m4:1.2.20
+    image: enginsightonpremise/reporter-m4:1.2.37
     networks:
     - redis
     - mongodb-cves
