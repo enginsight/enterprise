@@ -86,10 +86,6 @@ services:
 
   updater-m34:
     image: enginsightonpremise/updater-m34:1.0.6
-    networks:
-    - redis
-    depends_on:
-    - redis
     restart: always
     volumes:
     - "./conf/updater-m34/config.json.production:/etc/enginsight/updater-m34/config.json"
