@@ -1,4 +1,6 @@
 {
+  "loopDelay": 15000,
+  "initDelay": 10000,
   "database": {
     "uriConnectionString": "%%MONGODB_URI%%"
   }
