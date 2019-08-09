@@ -32,6 +32,8 @@ Follow the steps below for a short trial of the real experience:
     export DOCKER_USERNAME="<docker hub username>"
     
     export DOCKER_PASSWORD="<docker hub password>"
+
+    export REDIS_URI="redis://redis:6379"
     
     export MONGODB_URI="<Mongo replica set uri>"
     ```
