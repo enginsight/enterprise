@@ -75,7 +75,7 @@ services:
     - "./conf/anomalies-m28/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
-    image: enginsightonpremise/scheduler-m29:1.0.25
+    image: enginsightonpremise/scheduler-m29:1.0.24
     networks:
     - redis
     depends_on:
