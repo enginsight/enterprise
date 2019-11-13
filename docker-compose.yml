@@ -3,7 +3,7 @@ version: "2.0"
 services:
 
   ui-m1:
-    image: enginsightonpremise/ui-m1:1.8.1
+    image: enginsightonpremise/ui-m1:1.10.0
     ports:
     - "80:80"
     restart: always
@@ -11,7 +11,7 @@ services:
     - "./conf/ui-m1/environment.js.production:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: enginsightonpremise/server-m2:1.52.6
+    image: enginsightonpremise/server-m2:1.56.50
     networks:
     - redis
     ports:
@@ -23,7 +23,7 @@ services:
     - "./conf/server-m2/config.json.production:/etc/enginsight/server-m2/config.json"
 
   sentinel-m3:
-    image: enginsightonpremise/sentinel-m3:1.5.51
+    image: enginsightonpremise/sentinel-m3:1.5.63
     networks:
     - redis
     depends_on:
@@ -33,7 +33,7 @@ services:
     - "./conf/sentinel-m3/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: enginsightonpremise/reporter-m4:1.2.60
+    image: enginsightonpremise/reporter-m4:1.2.83
     networks:
     - redis
     - mongodb-cves
@@ -75,7 +75,7 @@ services:
     - "./conf/anomalies-m28/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
-    image: enginsightonpremise/scheduler-m29:1.0.24
+    image: enginsightonpremise/scheduler-m29:1.0.38
     networks:
     - redis
     depends_on:
@@ -85,7 +85,7 @@ services:
     - "./conf/scheduler-m29/config.json.production:/etc/enginsight/scheduler-m29/config.json"
 
   updater-m34:
-    image: enginsightonpremise/updater-m34:1.0.7
+    image: enginsightonpremise/updater-m34:1.0.11
     restart: always
     volumes:
     - "./conf/updater-m34/config.json.production:/etc/enginsight/updater-m34/config.json"
