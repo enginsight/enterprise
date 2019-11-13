@@ -34,6 +34,25 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 
     You should now be able to run Enginsight Enterprise successfully. Follow the steps further below to be able to use the full version.
 
+## Automatic Installation (CentOS 7/8)
+1. Set the following credentials in your console. 
+
+    _These are your docker hub user credentials you created in the earlier steps._
+
+    ```bash
+    export DOCKER_USERNAME=<docker hub username>
+
+    export DOCKER_PASSWORD=<docker hub password>
+    ```
+2. Run command  
+	```bash
+	curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/centos.sh | sudo -E bash
+	```
+
+	**_Please note: This version supports CentOS 7/8 only._**
+
+    You should now be able to run Enginsight Enterprise successfully. Follow the steps further below to be able to use the full version.
+
 ## Manual Installation
 The few spells to get the magic in your hands and Enginsight in your servers: 
 
