@@ -16,9 +16,7 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 3. Enginsight License. Please contact hello@enginsight.com for a license.
 
 
-## Quick Start Guide (for testing purposes only)
-Follow the steps below for a short trial of the real experience:
-
+## Quick Start (Debian 9/10)
 1. Set the following credentials in your console. 
 
     _These are your docker hub user credentials you created in the earlier steps._
