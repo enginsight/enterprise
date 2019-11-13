@@ -1,4 +1,3 @@
-
 # Enginsight Enterprise 
 Worried about the security of your infrastructure? Having troubles monitoring your systems round the clock? Well, no more, sit back while Enginsight does this for you. 
 The Enterprise solution is here, the magical potion to your plight. You can operate the platform on your very own servers. A fast and easy installation process built upon Docker, 
@@ -53,7 +52,7 @@ The few spells to get the magic in your hands and Enginsight in your servers:
 	```bash
 	chmod +x ./setup.sh && ./setup.sh docker
 	```
-  
+
 It might take several minutes for all the containers to be downloaded, and be up and running, 
 
 And Voila!!! You can use Enginsight on your own server exactly like the Enginsight web application. 
