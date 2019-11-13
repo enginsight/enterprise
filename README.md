@@ -49,16 +49,11 @@ The few spells to get the magic in your hands and Enginsight in your servers:
 	```bash 
 	git clone https://github.com/enginsight/enterprise.git && cd enterprise
 	```
-
-## Get Started
-1. To Start setup:  
+5. To Start setup:  
 	```bash
 	chmod +x ./setup.sh && ./setup.sh docker
 	```
-
-2. Update paths from the console and follow setup.sh for directions
-
-3. To run as service: 
+6. To run as service: 
 	```bash 
 	docker-compose up -d
 	```
