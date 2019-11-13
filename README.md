@@ -53,10 +53,7 @@ The few spells to get the magic in your hands and Enginsight in your servers:
 	```bash
 	chmod +x ./setup.sh && ./setup.sh docker
 	```
-6. To run as service: 
-	```bash 
-	docker-compose up -d
-	```
+  
 It might take several minutes for all the containers to be downloaded, and be up and running, 
 
 And Voila!!! You can use Enginsight on your own server exactly like the Enginsight web application. 
