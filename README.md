@@ -16,7 +16,7 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 3. Enginsight License. Please contact hello@enginsight.com for a license.
 
 
-## Quick Start (Debian 9/10)
+## Automatic Installation (Debian 9/10)
 1. Set the following credentials in your console. 
 
     _These are your docker hub user credentials you created in the earlier steps._
@@ -35,7 +35,7 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 
     You should now be able to run Enginsight Enterprise successfully. Follow the steps further below to be able to use the full version.
 
-## Installation
+## Manual Installation
 The few spells to get the magic in your hands and Enginsight in your servers: 
 
 1. Install (if you haven’t already) the latest [Docker version](https://docs.docker.com/install/). Follow the instructions from the [Docker installation guide](https://docs.docker.com/machine/install-machine/).
