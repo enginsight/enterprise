@@ -32,7 +32,7 @@ if [ -z "$MONGODB_URI" ]; then
 fi
 fi
 
-if [[ ! $MONGODB_URI == *"replicaSet"* ]] && [[ ! $MONGODB_URI == *"+srv"* ]]; then
+if [[ ! $MONGODB_URI == *"replicaSet"* ]]; then
   exit 1
 fi
 
