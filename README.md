@@ -8,8 +8,8 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 
 ## Prerequisites
 1. Operating system: (either)
-    1. Ubuntu/Debian
-    2. CentOS/Redhat/OpenSuse
+    1. Ubuntu 16/Ubuntu 18/Debian 9/Debian 10
+    2. CentOS 7/CentOS 8/Redhat/OpenSuse
 2. Create user at [Docker Hub](https://id.docker.com/login/). 
     
     _We ship our docker containers via the Docker Hub. We therefore require your Docker Hub profile details to ship the containers into your account._ 
@@ -30,10 +30,10 @@ Follow the steps below for a short trial of the real experience:
     ```
 2. Run command  
 	```bash
-	curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian-9.sh | sudo -E bash
+	curl -sSL https://raw.githubusercontent.com/enginsight/enterprise/master/quickstart/debian.sh | sudo -E bash
 	```
 
-	**_Please note: This version supports Debian 9 only._**
+	**_Please note: This version supports Debian 9/10 only._**
 
     You should now be able to run Enginsight Enterprise successfully. Follow the steps further below to be able to use the full version.
 
@@ -49,7 +49,7 @@ The few spells to get the magic in your hands and Enginsight in your servers:
 3. Install [Docker-Compose](https://docs.docker.com/compose/install/)
 4. Clone repository: 
 	```bash 
-	git clone https://github.com/enginsight/on-premise.git && cd on-premise
+	git clone https://github.com/enginsight/enterprise.git && cd enterprise
 	```
 
 ## Get Started
