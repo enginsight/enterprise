@@ -19,12 +19,12 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-if ! [ -x "$(type docker)" ]; then
+if ! type "docker" > /dev/null; then
   echo 'Error: docker is not installed.' >&2
   exit 1
 fi
 
-if ! [ -x "$(type docker-compose)" ]; then
+if ! type "docker-compose" > /dev/null; then
   echo 'Error: docker-compose is not installed.' >&2
   exit 1
 fi

@@ -5,7 +5,7 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-if ! [ -x "$(type docker)" ]; then
+if ! type "docker" > /dev/null; then
   sudo apt update
 	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
@@ -14,12 +14,12 @@ if ! [ -x "$(type docker)" ]; then
 	sudo apt install -y docker-ce
 fi
 
-if ! [ -x "$(type docker-compose)" ]; then
+if ! type "docker-compose" > /dev/null; then
   sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 	sudo chmod +x /usr/local/bin/docker-compose
 fi
 
-if ! [ -x "$(type git)" ]; then
+if ! type "git" > /dev/null; then
   sudo apt update
 	sudo apt install -y git
 fi
