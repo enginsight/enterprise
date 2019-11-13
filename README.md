@@ -7,18 +7,13 @@ access all Enginsight functions remotely on your server.
 For more information regarding the Enterprise solution? Visit [enginsight.com](https://enginsight.com/enterprise/).
 
 ## Prerequisites
-1. MongoDB replica set
-    1. [MongoDB Cloud Services](https://www.mongodb.com/cloud) free version is enough for testing purposes.
-    2. [Self-hosted](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/)
-
-    **_It is strongly recommended to have more than one instance in your Mogo Replica Set_.**
-2. Operating system: (either)
+1. Operating system: (either)
     1. Ubuntu/Debian
     2. CentOS/Redhat/OpenSuse
-3. Create user at [Docker Hub](https://id.docker.com/login/). 
+2. Create user at [Docker Hub](https://id.docker.com/login/). 
     
     _We ship our docker containers via the Docker Hub. We therefore require your Docker Hub profile details to ship the containers into your account._ 
-4. Enginsight License. Please contact hello@enginsight.com for a license.
+3. Enginsight License. Please contact hello@enginsight.com for a license.
 
 
 ## Quick Start Guide (for testing purposes only)
@@ -29,10 +24,9 @@ Follow the steps below for a short trial of the real experience:
     _These are your docker hub user credentials you created in the earlier steps._
 
     ```bash
-    export DOCKER_USERNAME="<docker hub username>"
-    
-    export DOCKER_PASSWORD="<docker hub password>"
+    export DOCKER_USERNAME=<docker hub username>
 
+    export DOCKER_PASSWORD=<docker hub password>
     ```
 2. Run command  
 	```bash
@@ -61,7 +55,7 @@ The few spells to get the magic in your hands and Enginsight in your servers:
 ## Get Started
 1. To Start setup:  
 	```bash
-	chmod +x ./setup.sh && ./setup.sh
+	chmod +x ./setup.sh && ./setup.sh docker
 	```
 
 2. Update paths from the console and follow setup.sh for directions
@@ -98,7 +92,7 @@ In order to update the Enginsight Stack:
     ```
 4. Build the refreshed containers again, recreate all containers even if the images haven't changed, Clean unused containers
     ```bash
-    docker-compose up --force-recreate --remove-orphans
+    docker-compose up --force-recreate --remove-orphans -V
     ```
 
 ## Change Config
