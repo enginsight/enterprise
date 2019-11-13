@@ -19,12 +19,12 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-if ! [ -x "$(command -v docker)" ]; then
+if ! [ -x "$(which docker)" ]; then
   echo 'Error: docker is not installed.' >&2
   exit 1
 fi
 
-if ! [ -x "$(command -v docker-compose)" ]; then
+if ! [ -x "$(which docker-compose)" ]; then
   echo 'Error: docker-compose is not installed.' >&2
   exit 1
 fi
