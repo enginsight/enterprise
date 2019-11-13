@@ -33,9 +33,6 @@ Follow the steps below for a short trial of the real experience:
     
     export DOCKER_PASSWORD="<docker hub password>"
 
-    export REDIS_URI="redis://redis:6379"
-    
-    export MONGODB_URI="<Mongo replica set uri>"
     ```
 2. Run command  
 	```bash

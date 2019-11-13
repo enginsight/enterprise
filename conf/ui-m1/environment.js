@@ -15,8 +15,6 @@ module.exports = function (environment) {
   };
 
   ENV.apiDomain = '%%API_URL%%';
-  ENV.cookieDomain = '%%COOKIE_DOMAIN%%';
-
   ENV.onpremise = {
     version: 1
   };

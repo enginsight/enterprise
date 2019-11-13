@@ -1,6 +1,32 @@
 
-version: "2.0"
+version: "3"
 services:
+  mongodb:
+    image: mongo:4-xenial
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    networks:
+    - mongodb
+    volumes:
+    - mongodb-volume:/data/db
+
+  mongodb-setup:
+    image: mongo:4-xenial
+    depends_on:
+    - mongodb
+    networks:
+    - mongodb
+    volumes:
+    - ./scripts:/scripts
+    entrypoint: ["sh", "/scripts/mongodb/initiate.sh"]
+
+  mongodb-cves:
+    image: mongo:4
+    networks:
+    - mongodb-cves
+    restart: always
+    volumes:
+    - mongodb-cves-volume:/data/db
 
   ui-m1:
     image: enginsightonpremise/ui-m1:1.10.0
@@ -11,13 +37,16 @@ services:
     - "./conf/ui-m1/environment.js.production:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: enginsightonpremise/server-m2:1.56.50
+    image: enginsightonpremise/server-m2:1.56.49
     networks:
     - redis
+    - mongodb
     ports:
     - "8080:8080"
     depends_on:
     - redis
+    - mongodb
+    - mongodb-setup
     restart: always
     volumes:
     - "./conf/server-m2/config.json.production:/etc/enginsight/server-m2/config.json"
@@ -26,8 +55,11 @@ services:
     image: enginsightonpremise/sentinel-m3:1.5.63
     networks:
     - redis
+    - mongodb
     depends_on:
     - redis
+    - mongodb
+    - mongodb-setup
     restart: always
     volumes:
     - "./conf/sentinel-m3/config.json.production:/etc/enginsight/sentinel-m3/config.json"
@@ -36,57 +68,69 @@ services:
     image: enginsightonpremise/reporter-m4:1.2.83
     networks:
     - redis
+    - mongodb
     - mongodb-cves
     depends_on:
     - redis
+    - mongodb-setup
     - mongodb-cves
     restart: always
     volumes:
     - "./conf/reporter-m4/config.json.production:/etc/enginsight/reporter-m4/config.json"
 
-  profiler-m22:
-    image: enginsightonpremise/profiler-m22:1.1.46
-    networks:
-    - redis
-    depends_on:
-    - redis
-    restart: always
-    volumes:
-    - "./conf/profiler-m22/config.json.production:/etc/enginsight/profiler-m22/config.json"
+  # profiler-m22:
+  #   image: enginsightonpremise/profiler-m22:1.1.46
+  #   networks:
+  #   - redis
+  #   depends_on:
+  #   - redis
+  #   restart: always
+  #   volumes:
+  #   - "./conf/profiler-m22/config.json.production:/etc/enginsight/profiler-m22/config.json"
 
   correspondent-m25:
     image: enginsightonpremise/correspondent-m25:1.0.37
     networks:
     - redis
+    - mongodb
     depends_on:
     - redis
+    - mongodb-setup
     restart: always
     volumes:
     - "./conf/correspondent-m25/config.json.production:/etc/enginsight/correspondent-m25/config.json"
 
-  anomalies-m28:
-    image: enginsightonpremise/anomalies-m28:1.0.11
-    networks:
-    - redis
-    depends_on:
-    - redis
-    restart: always
-    volumes:
-    - "./conf/anomalies-m28/config.json.production:/etc/enginsight/anomalies-m28/config.json"
+  # anomalies-m28:
+  #   image: enginsightonpremise/anomalies-m28:1.0.11
+  #   networks:
+  #   - redis
+  #   depends_on:
+  #   - redis
+  #   restart: always
+  #   volumes:
+  #   - "./conf/anomalies-m28/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
-    image: enginsightonpremise/scheduler-m29:1.0.38
+    image: enginsightonpremise/scheduler-m29:1.0.39
     networks:
     - redis
+    - mongodb
     depends_on:
     - redis
+    - mongodb-setup
     restart: always
     volumes:
     - "./conf/scheduler-m29/config.json.production:/etc/enginsight/scheduler-m29/config.json"
 
   updater-m34:
-    image: enginsightonpremise/updater-m34:1.0.11
+    image: enginsightonpremise/updater-m34:1.0.7
     restart: always
+    networks:
+    - redis
+    - mongodb
+    depends_on:
+    - redis
+    - mongodb-setup
     volumes:
     - "./conf/updater-m34/config.json.production:/etc/enginsight/updater-m34/config.json"
 
@@ -96,12 +140,11 @@ services:
     - redis
     restart: always
 
-  mongodb-cves:
-    image: mongo:4
-    networks:
-    - mongodb-cves
-    restart: always
-
 networks:
+  mongodb:
   redis:
   mongodb-cves:
+
+volumes:
+  mongodb-volume:
+  mongodb-cves-volume:

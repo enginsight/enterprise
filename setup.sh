@@ -1,13 +1,18 @@
 #!/bin/bash
 
 echo ""
-echo "    █      Enginsight OnPremise Setup v1.0"
+echo "    █      Enginsight Enterprise Setup v1.0"
 echo "  █ █   █  "
 echo "  █ █ █ █  Enginsight GmbH"
 echo "  █ █ █ █  Hans-Knöll-Straße 6, 07745 Jena"
 echo "  █   █ █  Geschäftsführer: Mario Jandeck, Eric Range"
 echo "      █    "
 echo ""
+
+DEFAULT_APP_URL=http://$(hostname -I | cut -f1 -d ' ')
+DEFAULT_API_URL=http://$(hostname -I | cut -f1 -d ' '):8080
+DEFAULT_MONGODB_URI=mongodb://mongodb:27017/enginsight?replicaSet=rs0
+DEFAULT_REDIS_URI=redis://redis:6379
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
@@ -24,15 +29,18 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-if [ ! "$MONGODB_URI" ]; then
-read -p 'Enter mongodb uri (e.g. mongodb://mongo1:27017,mongo2:27017,mongo3:27017/enginsight?replicaSet=ngs): ' MONGODB_URI
-if [ -z "$MONGODB_URI" ]; then
-  echo "We need a mongo uri."
-  exit 1
-fi
+if [[ $1 == "docker" ]]; then
+  MONGODB_URI=$DEFAULT_MONGODB_URI
+  REDIS_URI=$DEFAULT_REDIS_URI
+  APP_URL=$DEFAULT_APP_URL
+  API_URL=$DEFAULT_API_URL
 fi
 
-if [[ ! $MONGODB_URI == *"replicaSet"* ]] && [[ ! $MONGODB_URI == *"+srv"* ]]; then
+if [ ! "$MONGODB_URI" ]; then
+read -p 'Enter mongodb uri (default: mongodb://mongodb:27017/enginsight?replicaSet=rs0): ' MONGODB_URI && MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:27017/enginsight?replicaSet=rs0}
+fi
+
+if [[ ! $MONGODB_URI == *"replicaSet"* ]]; then
   exit 1
 fi
 
@@ -44,32 +52,25 @@ if [ -z "$LICENCE" ]; then
 fi
 fi
 
-if [ ! "$APP_URL" ]; then
-read -p 'Enter app url (default: http://localhost) : '      APP_URL && APP_URL=${APP_URL:-http://localhost}
-fi
-
-if [ ! "$API_URL" ]; then
-read -p 'Enter api url (default: http://localhost:8080) : ' API_URL && API_URL=${API_URL:-http://localhost:8080}
-fi
-
-if [ ! "$COOKIE_DOMAIN" ]; then
-read -p 'Enter cookie domain (default: .localhost) : '      COOKIE_DOMAIN && COOKIE_DOMAIN=${COOKIE_DOMAIN:-.localhost}
-fi
-
 if [ ! "$REDIS_URI" ]; then
 read -p 'Enter redis uri (default: redis://redis:6379) : '  REDIS_URI && REDIS_URI=${REDIS_URI:-redis://redis:6379}
 fi
 
+if [ ! "$APP_URL" ]; then
+read -p "Enter app url (default: http://$(hostname -I | cut -f1 -d ' ')) : "     APP_URL && APP_URL=${APP_URL:-$DEFAULT_APP_URL}
+fi
+
+if [ ! "$API_URL" ]; then
+read -p "Enter api url (default: http://$(hostname -I | cut -f1 -d ' '):8080) : " API_URL && API_URL=${API_URL:-$DEFAULT_API_URL}
+fi
+
 JWT_SECRET=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`
 
-echo "Settings:"
-echo $MONGODB_URI
-echo $REDIS_URI
-echo $APP_URL
-echo $API_URL
-echo $COOKIE_DOMAIN
-echo $JWT_SECRET
-echo "-----------------"
+echo "MongoDB: $MONGODB_URI"
+echo "Redis: $REDIS_URI"
+echo "APP Url: $APP_URL"
+echo "API Url: $API_URL"
+echo "Secret key: $JWT_SECRET"
 
 LICENSE=$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
 MONGODB_URI=$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
@@ -84,7 +85,6 @@ do
     config=`echo $config | sed -e "s/%%LICENCE%%/$LICENCE/g"`
     config=`echo $config | sed -e "s/%%MONGODB_URI%%/$MONGODB_URI/g"`
     config=`echo $config | sed -e "s/%%APP_URL%%/$APP_URL/g"`
-    config=`echo $config | sed -e "s/%%COOKIE_DOMAIN%%/$COOKIE_DOMAIN/g"`
     config=`echo $config | sed -e "s/%%API_URL%%/$API_URL/g"`
     config=`echo $config | sed -e "s/%%REDIS_URI%%/$REDIS_URI/g"`
     config=`echo $config | sed -e "s/%%JWT_SECRET%%/$JWT_SECRET/g"`
@@ -98,7 +98,6 @@ do
     config=`echo $config | sed -e "s/%%LICENCE%%/$LICENCE/g"`
     config=`echo $config | sed -e "s/%%MONGODB_URI%%/$MONGODB_URI/g"`
     config=`echo $config | sed -e "s/%%APP_URL%%/$APP_URL/g"`
-    config=`echo $config | sed -e "s/%%COOKIE_DOMAIN%%/$COOKIE_DOMAIN/g"`
     config=`echo $config | sed -e "s/%%API_URL%%/$API_URL/g"`
     config=`echo $config | sed -e "s/%%REDIS_URI%%/$REDIS_URI/g"`
     config=`echo $config | sed -e "s/%%JWT_SECRET%%/$JWT_SECRET/g"`
@@ -110,4 +109,4 @@ echo ''
 echo 'Starting initialization'
 echo ''
 
-docker-compose up -d --force-recreate --remove-orphans
+docker-compose up -d --quiet-pull --force-recreate --remove-orphans -V
