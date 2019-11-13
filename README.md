@@ -8,8 +8,8 @@ For more information regarding the Enterprise solution? Visit [enginsight.com](h
 
 ## Prerequisites
 1. Operating system: (either)
-    1. Ubuntu 16/Ubuntu 18/Debian 9/Debian 10
-    2. CentOS 7/CentOS 8/Redhat/OpenSuse
+    1. Ubuntu 16 / Ubuntu 18 / Debian 9 / Debian 10
+    2. CentOS 7 / CentOS 8 / Redhat / OpenSuse
 2. Create user at [Docker Hub](https://id.docker.com/login/). 
     
     _We ship our docker containers via the Docker Hub. We therefore require your Docker Hub profile details to ship the containers into your account._ 
