@@ -24,10 +24,6 @@
     "app": {
       "host": "%%APP_URL%%"
     },
-    "cache": "%%REDIS_URI%%",
-    "telegram": {
-      "token": "",
-      "supportID": ""
-    }
+    "cache": "%%REDIS_URI%%"
   }
   
