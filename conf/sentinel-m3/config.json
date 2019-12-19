@@ -5,6 +5,7 @@
       "uriConnectionString": "%%MONGODB_URI%%"
     },
     "email": {
+      "sender": "'Enginsight' <no-reply@enginsight.com>",
       "host": "",
       "port": "",
       "sslTls": true,

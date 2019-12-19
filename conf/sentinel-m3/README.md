@@ -28,6 +28,7 @@ All information is required by the email Module to send alerts and notifications
 |maxConnections|Limit of simultaneous connections to make against the SMTP server (defaults to 5).|
 |rateDelta|Defines the time measuring period in milliseconds for rate limiting.|
 |rateLimit|Limits the amount of emails sent within rateDelta.|
+|sender| Sender of the email.|
 
 
 ## SMS information
