@@ -1,0 +1,16 @@
+{
+  "database": {
+    "uriConnectionString": "%%MONGODB_URI%%"
+  },
+  "email": {
+    "sender": "'Enginsight' <no-reply@enginsight.com>",
+    "host": "",
+    "port": "",
+    "sslTls": true,
+    "user": "",
+    "pass": "",
+    "maxConnections": 2,
+    "rateDelta": 1000,
+    "rateLimit": 1
+  }
+}
