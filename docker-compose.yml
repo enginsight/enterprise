@@ -123,7 +123,7 @@ services:
     - "./conf/scheduler-m29/config.json.production:/etc/enginsight/scheduler-m29/config.json"
 
   updater-m34:
-    image: enginsightonpremise/updater-m34:1.0.37
+    image: enginsightonpremise/updater-m34:1.0.38
     restart: always
     networks:
     - redis
