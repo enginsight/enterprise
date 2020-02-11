@@ -111,7 +111,7 @@ services:
   #   - "./conf/anomalies-m28/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
-    image: enginsightonpremise/scheduler-m29:1.0.49
+    image: enginsightonpremise/scheduler-m29:1.2.5
     networks:
     - redis
     - mongodb
@@ -135,7 +135,7 @@ services:
     - "./conf/updater-m34/config.json.production:/etc/enginsight/updater-m34/config.json"
 
   generator-m35:
-    image: enginsightonpremise/generator-m35:1.1.8
+    image: enginsightonpremise/generator-m35:1.2.5
     networks:
     - mongodb
     depends_on:
