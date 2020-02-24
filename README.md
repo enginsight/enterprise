@@ -74,6 +74,7 @@ The few spells to get the magic in your hands and Enginsight in your servers:
 It might take several minutes for all the containers to be downloaded, and be up and running, 
 
 And Voila!!! You can use Enginsight on your own server exactly like the Enginsight web application. 
+
 You can login with the following default credentials after installation: 
 
 username: **admin@ngs-server-m2.com**
