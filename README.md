@@ -82,7 +82,7 @@ You can login with the following default credentials after installation:
 username: **admin@ngs-server-m2.com**
 password: **ngs-server-m2**
 
-_stronlgy suggest you to please change these credentials immediately_
+_strongly suggest you to please change these credentials immediately_
 
 If you have any questions regarding the installation feel free to contact us at support@enginsight.com. Our communication channels are always open to your questions and concerns.
 
