@@ -73,16 +73,16 @@ The few spells to get the magic in your hands and Enginsight in your servers:
   ```bash
 	chmod +x ./setup.sh && ./setup.sh docker
   ```
-_for custom onPremise installation ignore the docker parameter._
+_For custom onPremise Enterprise installation ignore the docker parameter._
 
 It might take several minutes for all the containers to be downloaded, and be up and running, And Voila!!! You can use Enginsight on your own server exactly like the Enginsight web application. 
 
 You can login with the following default credentials after installation: 
 
-username: **admin@ngs-server-m2.com**
-password: **ngs-server-m2**
+Username: **admin@ngs-server-m2.com**
+Password: **ngs-server-m2**
 
-_strongly suggest you to please change these credentials immediately_
+_Strongly suggest you to please change these credentials immediately_
 
 If you have any questions regarding the installation feel free to contact us at support@enginsight.com. Our communication channels are always open to your questions and concerns.
 
