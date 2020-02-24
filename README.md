@@ -77,7 +77,6 @@ And Voila!!! You can use Enginsight on your own server exactly like the Enginsig
 You can login with the following default credentials after installation: 
 
 username: **admin@ngs-server-m2.com**
-
 password: **ngs-server-m2**
 
 
