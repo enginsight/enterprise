@@ -29,7 +29,7 @@ services:
     - mongodb-cves-volume:/data/db
 
   ui-m1:
-    image: enginsightonpremise/ui-m1:1.13.0
+    image: enginsightonpremise/ui-m1:1.16.0
     ports:
     - "80:80"
     restart: always
@@ -37,7 +37,7 @@ services:
     - "./conf/ui-m1/environment.js.production:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: enginsightonpremise/server-m2:2.3.0
+    image: enginsightonpremise/server-m2:2.4.36
     networks:
     - redis
     - mongodb
@@ -52,7 +52,7 @@ services:
     - "./conf/server-m2/config.json.production:/etc/enginsight/server-m2/config.json"
 
   sentinel-m3:
-    image: enginsightonpremise/sentinel-m3:1.8.12
+    image: enginsightonpremise/sentinel-m3:1.8.34
     networks:
     - redis
     - mongodb
