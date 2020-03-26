@@ -3,7 +3,7 @@
       "uriConnectionString": "%%MONGODB_URI%%"
     },
     "cves": {
-      "uriConnectionString": "mongodb://mongodb-cves/cves?authSource=admin"
+      "uriConnectionString": "mongodb://mongodb-cves/cves"
     },
     "cache": {
       "provider": "redis",
