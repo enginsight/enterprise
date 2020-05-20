@@ -135,7 +135,7 @@ services:
     - "./conf/updater-m34/config.json.production:/etc/enginsight/updater-m34/config.json"
 
   generator-m35:
-    image: enginsightonpremise/generator-m35:1.2.51
+    image: enginsightonpremise/generator-m35:1.2.52
     networks:
     - mongodb
     depends_on:
