@@ -52,7 +52,7 @@ services:
     - "./conf/server-m2/config.json.production:/etc/enginsight/server-m2/config.json"
 
   sentinel-m3:
-    image: enginsightonpremise/sentinel-m3:1.9.11
+    image: enginsightonpremise/sentinel-m3:1.9.13
     networks:
     - redis
     - mongodb
