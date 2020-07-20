@@ -1,0 +1,5 @@
+{
+    "database": {
+      "uriConnectionString": "%%MONGODB_URI%%"
+    }
+  }
