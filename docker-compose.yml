@@ -79,7 +79,7 @@ services:
     - "./conf/reporter-m4/config.json.production:/etc/enginsight/reporter-m4/config.json"
 
   profiler-m22:
-    image: enginsightonpremise/profiler-m22:2.1.64
+    image: enginsightonpremise/profiler-m22:2.1.67
     networks:
     - redis
     - mongodb
