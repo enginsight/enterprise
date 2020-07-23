@@ -79,7 +79,7 @@ services:
     - "./conf/reporter-m4/config.json.production:/etc/enginsight/reporter-m4/config.json"
 
   profiler-m22:
-    image: enginsightonpremise/profiler-m22:2.1.61
+    image: enginsightonpremise/profiler-m22:2.1.64
     networks:
     - redis
     - mongodb
@@ -107,8 +107,11 @@ services:
     image: enginsightonpremise/anomalies-m28:2.0.40
     networks:
     - redis
+    - mongodb
     depends_on:
     - redis
+    - mongodb
+    - mongodb-setup
     restart: always
     volumes:
     - "./conf/anomalies-m28/config.json.production:/etc/enginsight/anomalies-m28/config.json"
