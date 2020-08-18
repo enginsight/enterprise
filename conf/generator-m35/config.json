@@ -2,6 +2,8 @@
   "database": {
     "uriConnectionString": "%%MONGODB_URI%%"
   },
+  "host": "%%APP_URL%%",
+  "summaryMail": "",
   "email": {
     "sender": "'Enginsight' <no-reply@enginsight.com>",
     "host": "",
@@ -11,6 +13,8 @@
     "pass": "",
     "maxConnections": 2,
     "rateDelta": 1000,
-    "rateLimit": 1
+    "rateLimit": 1,
+    "unqueued": true,
+    "dailyLimit": 10
   }
 }
