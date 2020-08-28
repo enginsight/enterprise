@@ -52,7 +52,7 @@ services:
     - "./conf/server-m2/config.json.production:/etc/enginsight/server-m2/config.json"
 
   sentinel-m3:
-    image: enginsightonpremise/sentinel-m3:2.1.31
+    image: enginsightonpremise/sentinel-m3:2.1.43
     networks:
     - redis
     - mongodb
@@ -65,7 +65,7 @@ services:
     - "./conf/sentinel-m3/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: enginsightonpremise/reporter-m4:1.4.8
+    image: enginsightonpremise/reporter-m4:1.4.16
     networks:
     - redis
     - mongodb
@@ -117,7 +117,7 @@ services:
     - "./conf/anomalies-m28/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
-    image: enginsightonpremise/scheduler-m29:1.2.31
+    image: enginsightonpremise/scheduler-m29:1.2.34
     networks:
     - redis
     - mongodb
