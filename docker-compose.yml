@@ -65,7 +65,7 @@ services:
     - "./conf/sentinel-m3/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: enginsightonpremise/reporter-m4:1.4.16
+    image: enginsightonpremise/reporter-m4:1.4.17
     networks:
     - redis
     - mongodb
