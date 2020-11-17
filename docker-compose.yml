@@ -65,7 +65,7 @@ services:
     - "./conf/sentinel-m3/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: enginsightonpremise/reporter-m4:1.5.14
+    image: enginsightonpremise/reporter-m4:1.6.6
     networks:
     - redis
     - mongodb
@@ -151,7 +151,7 @@ services:
     - "./conf/generator-m35/config.json.production:/etc/enginsight/generator-m35/config.json"
 
   historian-m38:
-    image: enginsightonpremise/historian-m38:1.1.7
+    image: enginsightonpremise/historian-m38:1.1.17
     networks:
     - mongodb
     depends_on:
