@@ -12,5 +12,6 @@
     "maxConnections": 2,
     "rateDelta": 1000,
     "rateLimit": 1
-  }
+  },
+  "cache":  "%%REDIS_URI%%"
 }

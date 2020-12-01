@@ -1,6 +1,6 @@
 {
     "database": {
-      "uriConnectionString": "%%MONGODB_URI%%"
+      "uriConnectionString" : "%%MONGODB_URI%%"
     },
     "cache":  "%%REDIS_URI%%"
   }
