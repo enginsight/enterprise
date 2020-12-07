@@ -165,7 +165,7 @@ services:
     - "./conf/historian-m38/config.json.production:/etc/enginsight/historian-m38/config.json"
 
   themis-m43:
-    image: enginsightonpremise/themis-m43:1.0.5
+    image: enginsightonpremise/themis-m43:1.0.9
     networks:
     - redis
     - mongodb
