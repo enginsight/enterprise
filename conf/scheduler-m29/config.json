@@ -1,9 +1,0 @@
-{
-    "loopDelay": 15000,
-    "initDelay": 15000,
-    "database": {
-      "uriConnectionString": "%%MONGODB_URI%%"
-    },
-    "cache": "%%REDIS_URI%%"
-  }
-  

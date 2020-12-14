@@ -1,0 +1,57 @@
+{
+  "onpremise": {
+    "twoFactor": {
+      "enabled": false
+    }
+  },
+  "api": {
+    "port": 8080,
+    "timeout": 5000,
+    "cookies": {
+      "maxAge": 3600000,
+      "domain": "",
+      "path": "/",
+      "signed": false
+    },
+    "recaptcha": {
+      "secret": "",
+      "host": "www.google.com",
+      "path": "/recaptcha/api/siteverify",
+      "method": "POST"
+    },
+    "headers": {},
+    "jwt": {
+      "secret": "%%JWT_SECRET%%",
+      "expiresIn": "24h"
+    }
+  },
+  "loopDelay": 15000,
+  "database": {
+    "uriConnectionString": "%%MONGODB_URI%%"
+  },
+  "cache": "%%REDIS_URI%%",
+  "email": {
+    "sender": "'Enginsight' <no-reply@enginsight.com>",
+    "host": "",
+    "port": "",
+    "sslTls": true,
+    "user": "",
+    "pass": "",
+    "maxConnections": 2,
+    "rateDelta": 1000,
+    "rateLimit": 1
+  },
+  "cves": {
+    "uriConnectionString": "mongodb://mongodb-cves/cves"
+  },
+  "app": {
+    "host": "%%APP_URL%%"
+  },
+  "sms": {
+    "limit": 20,
+    "region": "",
+    "accessKeyId": "",
+    "secretAccessKey": "",
+    "senderId": ""
+  }
+}
