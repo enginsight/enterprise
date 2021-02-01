@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo ""
-echo "    █      Enginsight Enterprise Setup v1.0"
+echo "    █      Enginsight Enterprise Setup v2.0"
 echo "  █ █   █  "
 echo "  █ █ █ █  Enginsight GmbH"
 echo "  █ █ █ █  Hans-Knöll-Straße 6, 07745 Jena"
@@ -9,104 +9,137 @@ echo "  █   █ █  Geschäftsführer: Mario Jandeck, Eric Range"
 echo "      █    "
 echo ""
 
-DEFAULT_APP_URL=http://$(hostname -I | cut -f1 -d ' ')
-DEFAULT_API_URL=http://$(hostname -I | cut -f1 -d ' '):8080
+DEFAULT_APP_URL="http://$(hostname -I | cut -f1 -d ' ')"
+DEFAULT_APP_URL_FILE="./conf/DEFAULT_APP_URL.conf"
+DEFAULT_API_URL="http://$(hostname -I | cut -f1 -d ' '):8080"
+DEFAULT_API_URL_FILE="./conf/DEFAULT_API_URL.conf"
+
 DEFAULT_MONGODB_URI=mongodb://mongodb:27017/enginsight?replicaSet=rs0
+DEFAULT_MONGODB_URI_FILE="./conf/DEFAULT_MONGODB_URI.conf"
+
 DEFAULT_REDIS_URI=redis://redis:6379
+DEFAULT_REDIS_URI_FILE="./conf/DEFAULT_REDIS_URI.conf"
+
+DEFAULT_JWT_SECRET_FILE="./conf/DEFAULT_JWT_SECRET.conf"
 
 if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit 1
+then echo "Please run as root"
+    exit 1
 fi
 
 if ! type "docker" > /dev/null; then
-  echo 'Error: docker is not installed.' >&2
-  exit 1
+    echo 'Error: docker is not installed.' >&2
+    exit 1
 fi
 
 if ! type "docker-compose" > /dev/null; then
-  echo 'Error: docker-compose is not installed.' >&2
-  exit 1
+    echo 'Error: docker-compose is not installed.' >&2
+    exit 1
 fi
 
 if [[ $1 == "docker" ]]; then
-  MONGODB_URI=$DEFAULT_MONGODB_URI
-  REDIS_URI=$DEFAULT_REDIS_URI
-  APP_URL=$DEFAULT_APP_URL
-  API_URL=$DEFAULT_API_URL
+    MONGODB_URI=$DEFAULT_MONGODB_URI
+    REDIS_URI=$DEFAULT_REDIS_URI
+    APP_URL=$DEFAULT_APP_URL
+    API_URL=$DEFAULT_API_URL
 fi
 
+if [ -s $DEFAULT_JWT_SECRET_FILE ]; then
+    JWT_SECRET=$(cat $DEFAULT_JWT_SECRET_FILE)
+else
+    JWT_SECRET=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`
+fi
+
+# Write value to file.
+echo $JWT_SECRET > $DEFAULT_JWT_SECRET_FILE
+
 if [ ! "$MONGODB_URI" ]; then
-read -p 'Enter mongodb uri (default: mongodb://mongodb:27017/enginsight?replicaSet=rs0): ' MONGODB_URI && MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:27017/enginsight?replicaSet=rs0}
+    if [ -s $DEFAULT_MONGODB_URI_FILE ]; then
+        DEFAULT_MONGODB_URI=$(cat $DEFAULT_MONGODB_URI_FILE)
+    fi
+
+    read -p "Enter MongoDB URI ($DEFAULT_MONGODB_URI): " MONGODB_URI && MONGODB_URI=${MONGODB_URI:-$DEFAULT_MONGODB_URI}
 fi
 
 if [[ ! $MONGODB_URI == *"replicaSet"* ]]; then
-  exit 1
+    echo "Invalid MongoDB URI"
+    exit 1
 fi
 
-if [ ! "$MONGODB_URI" ]; then
-read -p 'Enter your licence: ' LICENCE
-if [ -z "$LICENCE" ]; then
-  echo "We need a licence."
-  exit 1
-fi
-fi
+# Write value to file.
+echo $MONGODB_URI > $DEFAULT_MONGODB_URI_FILE
 
 if [ ! "$REDIS_URI" ]; then
-read -p 'Enter redis uri (default: redis://redis:6379) : '  REDIS_URI && REDIS_URI=${REDIS_URI:-redis://redis:6379}
+    if [ -s $DEFAULT_REDIS_URI_FILE ]; then
+        DEFAULT_REDIS_URI=$(cat $DEFAULT_REDIS_URI_FILE)
+    fi
+
+    read -p "Enter Redis URI ($DEFAULT_REDIS_URI) : " REDIS_URI && REDIS_URI=${REDIS_URI:-$DEFAULT_REDIS_URI}
 fi
+
+if [[ ! $REDIS_URI == *"redis://"* ]]; then
+    echo "Invalid Redis URI"
+    exit 1
+fi
+
+# Write value to file.
+echo $REDIS_URI > $DEFAULT_REDIS_URI_FILE
 
 if [ ! "$APP_URL" ]; then
-read -p "Enter app url (default: http://$(hostname -I | cut -f1 -d ' ')) : "     APP_URL && APP_URL=${APP_URL:-$DEFAULT_APP_URL}
+    if [ -s $DEFAULT_APP_URL_FILE ]; then
+        DEFAULT_APP_URL=$(cat $DEFAULT_APP_URL_FILE)
+    fi
+
+    read -p "Enter APP URL ($DEFAULT_APP_URL) : " APP_URL && APP_URL=${APP_URL:-$DEFAULT_APP_URL}
 fi
+
+if [[ ! $APP_URL == *"http"* ]]; then
+    echo "Invalid APP URL"
+    exit 1
+fi
+
+# Write value to file.
+echo $APP_URL > $DEFAULT_APP_URL_FILE
 
 if [ ! "$API_URL" ]; then
-read -p "Enter api url (default: http://$(hostname -I | cut -f1 -d ' '):8080) : " API_URL && API_URL=${API_URL:-$DEFAULT_API_URL}
+    if [ -s $DEFAULT_API_URL_FILE ]; then
+        DEFAULT_API_URL=$(cat $DEFAULT_API_URL_FILE)
+    fi
+
+    read -p "Enter API URL ($DEFAULT_API_URL) : " API_URL && API_URL=${API_URL:-$DEFAULT_API_URL}
 fi
 
-JWT_SECRET=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32`
+if [[ ! $API_URL == *"http"* ]]; then
+    echo "Invalid APP URL"
+    exit 1
+fi
 
-echo "MongoDB: $MONGODB_URI"
-echo "Redis: $REDIS_URI"
-echo "APP Url: $APP_URL"
-echo "API Url: $API_URL"
-echo "Secret key: $JWT_SECRET"
+# Write value to file.
+echo $API_URL > $DEFAULT_API_URL_FILE
+echo ""
 
-LICENSE=$(echo $LICENCE | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
-MONGODB_URI=$(echo $MONGODB_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
-REDIS_URI=$(echo $REDIS_URI | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
-APP_URL=$(echo $APP_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
-API_URL=$(echo $API_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
-JWT_SECRET=$(echo $JWT_SECRET | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
+# Show values in a table.
+for val in "MONGODB_URI" "REDIS_URI" "APP_URL" "API_URL" "JWT_SECRET"; do printf "%12s %s\n" "$val:" "${!val}"; done
 
-for file in $(find ./conf/* -maxdepth 10 -name "*.js")
+# Go through all config files...
+for file in $(find ./conf/* -maxdepth 10 -name "*.json" -o -name "*.js")
 do
     config=$(<$file)
-    config=`echo $config | sed -e "s/%%LICENCE%%/$LICENCE/g"`
-    config=`echo $config | sed -e "s/%%MONGODB_URI%%/$MONGODB_URI/g"`
-    config=`echo $config | sed -e "s/%%APP_URL%%/$APP_URL/g"`
-    config=`echo $config | sed -e "s/%%API_URL%%/$API_URL/g"`
-    config=`echo $config | sed -e "s/%%REDIS_URI%%/$REDIS_URI/g"`
-    config=`echo $config | sed -e "s/%%JWT_SECRET%%/$JWT_SECRET/g"`
 
-    echo $config > $file.production
-done
+    for name in "MONGODB_URI" "REDIS_URI" "APP_URL" "API_URL" "JWT_SECRET"; do
+        # Sanitize invalid json characters.
+        value=$(echo ${!name} | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
 
-for file in $(find ./conf/* -maxdepth 10 -name "*.json")
-do
-    config=$(<$file)
-    config=`echo $config | sed -e "s/%%LICENCE%%/$LICENCE/g"`
-    config=`echo $config | sed -e "s/%%MONGODB_URI%%/$MONGODB_URI/g"`
-    config=`echo $config | sed -e "s/%%APP_URL%%/$APP_URL/g"`
-    config=`echo $config | sed -e "s/%%API_URL%%/$API_URL/g"`
-    config=`echo $config | sed -e "s/%%REDIS_URI%%/$REDIS_URI/g"`
-    config=`echo $config | sed -e "s/%%JWT_SECRET%%/$JWT_SECRET/g"`
+        # Replace value from config template.
+        config=`echo $config | sed -e "s/%%$name%%/$value/g"`
+    done
 
+    # Save the new config to the ".production" file.
     echo $config > $file.production
 done
 
 echo ''
-echo 'Starting initialization'
+echo 'Starting initialization...'
 echo ''
 
-docker-compose up -d --quiet-pull --force-recreate --remove-orphans -V
+docker-compose up -d --force-recreate --remove-orphans -V
