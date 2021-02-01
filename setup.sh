@@ -17,7 +17,7 @@ eula()
     echo ""
     echo "This End-User License Agreement (EULA) is a legal agreement between you (either "
     echo "as an individual or on behalf of an entity) and Enginsight GmbH regarding your  "
-    echo "use of the Enginsight host agent application 'pulsar', including all associated "
+    echo "use of the Enginsight On-Premises 'Enterprise', including all associated "
     echo "documentation (the 'Software')."
     echo ""
     echo "BEFORE CLICKING TO START DOWNLOADING THE SOFTWARE YOU SHOULD CAREFULLY READ THE "
