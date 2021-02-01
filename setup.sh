@@ -9,6 +9,42 @@ echo "  █   █ █  Geschäftsführer: Mario Jandeck, Eric Range"
 echo "      █    "
 echo ""
 
+eula()
+{
+    echo ""
+    echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    echo "IMPORTANT-READ CAREFULLY:"
+    echo ""
+    echo "This End-User License Agreement (EULA) is a legal agreement between you (either "
+    echo "as an individual or on behalf of an entity) and Enginsight GmbH regarding your  "
+    echo "use of the Enginsight host agent application 'pulsar', including all associated "
+    echo "documentation (the 'Software')."
+    echo ""
+    echo "BEFORE CLICKING TO START DOWNLOADING THE SOFTWARE YOU SHOULD CAREFULLY READ THE "
+    echo "TERMS AND CONDITIONS OF THIS LICENCE AGREEMENT. BY DOWNLOADING YOU ARE AGREEING "
+    echo "TO BE LEGALLY BOUND BY THE TERMS AND CONDITIONS OF THIS LICENCE AGREEMENT AND   "
+    echo "AGREE TO BECOME A LICENSEE. IF YOU DO NOT AGREE TO ALL OF THE TERMS AND         "
+    echo "CONDITIONS OF THIS LICENCE AGREEMENT DO NOT DOWNLOAD OR USE THE SOFTWARE.       "
+    echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    echo ""
+    echo "You can find our EULA here: https://dls.enginsight.com/legal/eula-de.pdf"
+    read -p "Do you accept the terms and conditions of this Licence Agreement? (y/n): " answer </dev/tty
+    echo ""
+
+    case ${answer:0:1} in
+    y|Y|j )
+        # Write value to file.
+        echo "true" > $ACCPETED_EULA_FILE
+        ;;
+
+    *)
+        print 'Unexpected input. Abort...'
+        exit 1
+        ;;
+
+    esac
+}
+
 DEFAULT_APP_URL="http://$(hostname -I | cut -f1 -d ' ')"
 DEFAULT_APP_URL_FILE="./conf/DEFAULT_APP_URL.conf"
 DEFAULT_API_URL="http://$(hostname -I | cut -f1 -d ' '):8080"
@@ -22,8 +58,19 @@ DEFAULT_REDIS_URI_FILE="./conf/DEFAULT_REDIS_URI.conf"
 
 DEFAULT_JWT_SECRET_FILE="./conf/DEFAULT_JWT_SECRET.conf"
 
-if [ "$EUID" -ne 0 ]
-then echo "Please run as root"
+ACCPETED_EULA="false"
+ACCPETED_EULA_FILE="./conf/ACCEPTED_EULA.conf"
+
+if [ -s $ACCPETED_EULA_FILE ]; then
+    ACCPETED_EULA=$(cat $ACCPETED_EULA_FILE)
+fi
+
+if [[ "$ACCPETED_EULA" != "true" ]]; then
+  eula
+fi
+
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root"
     exit 1
 fi
 
