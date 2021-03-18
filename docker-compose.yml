@@ -165,6 +165,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/themis-m43/config.json"
   redis:
     image: redis:4-alpine
+    command: [sh, -c, "rm -f /data/dump.rdb && redis-server"]
     networks:
     - redis
     restart: always
