@@ -31,7 +31,7 @@
   },
   "cache": "%%REDIS_URI%%",
   "email": {
-    "sender": "'Enginsight' <no-reply@enginsight.com>",
+    "sender": "'Enginsight' <no-reply@your.domain>",
     "host": "",
     "port": "",
     "sslTls": true,
