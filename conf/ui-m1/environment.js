@@ -6,22 +6,6 @@ module.exports = function (environment) {
     rootURL: '/',
     locationType: 'auto',
     recaptchaKey: '',
-    
-    // corporateIdentity: {
-    //   company: 'Enginsight GmbH',
-    //   companySlug: 'Enginsight',
-    //   about: '',
-    //   website: '',
-    //   logo: '<svg...'
-    // },
-
-    // legal: {
-    //   dataProcessingAgreement: "https://...",
-    //   privacyPolicy: "https://...",
-    //   imprint: "https://...",
-    //   terms: "https://..."
-    // },
-
     EmberENV: {
       FEATURES: {}
     },
