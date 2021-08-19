@@ -52,7 +52,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/server-m2/config.json"
 
   sentinel-m3:
-    image: registry.enginsight.com/enginsight/sentinel-m3:2.14.12
+    image: registry.enginsight.com/enginsight/sentinel-m3:2.15.5
     networks:
     - redis
     - mongodb
@@ -65,7 +65,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: registry.enginsight.com/enginsight/reporter-m4:1.14.7
+    image: registry.enginsight.com/enginsight/reporter-m4:1.16.15
     networks:
     - redis
     - mongodb
@@ -79,7 +79,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/reporter-m4/config.json"
 
   profiler-m22:
-    image: registry.enginsight.com/enginsight/profiler-m22:2.2.1
+    image: registry.enginsight.com/enginsight/profiler-m22:2.2.9
     networks:
     - redis
     - mongodb
@@ -92,7 +92,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/profiler-m22/config.json"
 
   anomalies-m28:
-    image: registry.enginsight.com/enginsight/anomalies-m28:2.1.0
+    image: registry.enginsight.com/enginsight/anomalies-m28:2.2.2
     networks:
     - redis
     - mongodb
@@ -105,7 +105,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
-    image: registry.enginsight.com/enginsight/scheduler-m29:1.4.0
+    image: registry.enginsight.com/enginsight/scheduler-m29:1.5.1
     networks:
     - redis
     - mongodb
@@ -117,7 +117,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/scheduler-m29/config.json"
 
   updater-m34:
-    image: registry.enginsight.com/enginsight/updater-m34:1.5.2
+    image: registry.enginsight.com/enginsight/updater-m34:1.5.3
     restart: always
     networks:
     - redis
@@ -129,7 +129,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/updater-m34/config.json"
 
   generator-m35:
-    image: registry.enginsight.com/enginsight/generator-m35:1.9.16
+    image: registry.enginsight.com/enginsight/generator-m35:1.10.8
     networks:
     - redis
     - mongodb
@@ -141,7 +141,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/generator-m35/config.json"
 
   historian-m38:
-    image: registry.enginsight.com/enginsight/historian-m38:1.5.0
+    image: registry.enginsight.com/enginsight/historian-m38:2.1.13
     networks:
     - redis
     - mongodb
@@ -153,7 +153,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/historian-m38/config.json"
 
   themis-m43:
-    image: registry.enginsight.com/enginsight/themis-m43:1.8.15
+    image: registry.enginsight.com/enginsight/themis-m43:1.9.6
     networks:
     - redis
     - mongodb
