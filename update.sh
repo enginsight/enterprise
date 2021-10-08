@@ -1,5 +1,57 @@
 #!/bin/bash
 
+function show_error () {
+  echo "       Computer says no!"
+  echo "             /"
+  echo "        ________"
+  echo "       |       .|"
+  echo "       |  NO!  .|"
+  echo "       |       .|"
+  echo "       |________|"
+  echo "       __|___|__"
+  echo " _____|_________|____"
+  echo "                    _|"
+  echo "                   |"
+  echo "                   |"
+  echo "                   |"
+  echo " ________________  |"
+  echo "                 |_|"
+  echo ""
+  echo ""
+}
+
+response=""
+
+function update () {
+  echo "Update Enginsight Auto-Updater..."
+
+  download "https://raw.githubusercontent.com/enginsight/enterprise/master/update.sh"
+
+  echo "$response" > ./update.sh
+
+  chmod +x ./update.sh
+
+  ./update.sh "update"
+
+  exit 0
+}
+
+function download () {
+  response=$(wget -qO- $1 2>/dev/null || curl -qf $1 2>/dev/null)
+  exit_code=$?
+
+  if ! [ $exit_code == 0 ]; then
+    show_error
+
+    echo "Can not download latest versions. Check your internet connection!"
+    exit 1
+  fi
+}
+
+if ! [ "$1" = "update" ]; then
+  update
+fi
+
 echo ""
 echo "    █      Enginsight Auto-Updater"
 echo "  █ █   █  "
@@ -9,7 +61,7 @@ echo "  █   █ █  Geschäftsführer: Mario Jandeck, Eric Range"
 echo "      █    "
 echo ""
 
-latest_versions=$(curl -q https://raw.githubusercontent.com/enginsight/enterprise/master/docker-compose.yml 2>/dev/null)
+download "https://raw.githubusercontent.com/enginsight/enterprise/master/docker-compose.yml"
 
 declare -a services=(
   "server-m2"
@@ -28,7 +80,7 @@ declare -a services=(
 for service in "${services[@]}"
 do
   regex="/$service:([0-9]+\.[0-9]+\.[0-9]+)"
-  if [[ $latest_versions =~ $regex ]]; then
+  if [[ $response =~ $regex ]]; then
     latest="${BASH_REMATCH[1]}"
 
     printf "%16s %8s %8s\n" "$service:" "$latest" "Is now latest version!"
@@ -41,4 +93,4 @@ done
 echo ""
 echo "Restarting instance..."
 
-docker-compose up -d --force-recreate --remove-orphans -V
+# docker-compose up -d --force-recreate --remove-orphans -V
