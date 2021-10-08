@@ -93,4 +93,4 @@ done
 echo ""
 echo "Restarting instance..."
 
-# docker-compose up -d --force-recreate --remove-orphans -V
+docker-compose up -d --force-recreate --remove-orphans -V
