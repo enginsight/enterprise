@@ -50,7 +50,7 @@ DEFAULT_APP_URL_FILE="./conf/DEFAULT_APP_URL.conf"
 DEFAULT_API_URL="http://$(hostname -I | cut -f1 -d ' '):8080"
 DEFAULT_API_URL_FILE="./conf/DEFAULT_API_URL.conf"
 
-DEFAULT_MONGODB_URI=mongodb://(dbIP):27017/enginsight?replicaSet=rs0
+DEFAULT_MONGODB_URI=mongodb://ipOfDBServer:27017/enginsight?replicaSet=rs0
 DEFAULT_MONGODB_URI_FILE="./conf/DEFAULT_MONGODB_URI.conf"
 
 DEFAULT_REDIS_URI=redis://redis:6379
