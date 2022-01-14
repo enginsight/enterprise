@@ -42,6 +42,12 @@
     "rateDelta": 1000,
     "rateLimit": 1
   },
+  "integrations": {
+    "slack": {
+      "clientId": "",
+      "clientSecret": ""
+    }
+  },
   "cves": {
     "uriConnectionString": "mongodb://mongodb-cves/cves"
   },
