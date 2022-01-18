@@ -93,4 +93,21 @@ done
 echo ""
 echo "Restarting instance..."
 
-docker-compose up -d --force-recreate --remove-orphans -V
+declare -a docker_compose_paths=(
+  "docker-compose"
+  "/usr/local/bin/docker-compose"
+)
+
+for docker_compose in "${docker_compose_paths[@]}"
+do
+  if command -v $docker_compose &> /dev/null
+  then
+    command $docker_compose up -d --force-recreate --remove-orphans -V
+    exit 0
+  fi
+done
+
+show_error
+echo "Could not find docker-compose command in:"
+echo "${docker_compose_paths[*]}"
+exit 1
