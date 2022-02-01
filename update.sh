@@ -48,6 +48,24 @@ function download () {
   fi
 }
 
+check_config()
+{
+  if command -v json_pp &> /dev/null
+  then
+    config=$(cat conf/services/config.json)
+    echo ""
+
+    if echo $config | json_pp >/dev/null 2>&1; then
+      echo "Your configuration seems to be correct. Continue..."
+    else
+      echo "Attention! Your configuration seems to be incorrect."
+      echo "Please stick to the JSON format."
+      read -p "If you still want to continue, press Enter."
+    fi
+
+  fi
+}
+
 if ! [ "$1" = "update" ]; then
   update
 fi
@@ -90,8 +108,11 @@ do
 
 done
 
+check_config
+
 echo ""
-echo "Restarting instance..."
+echo "Starting initialization..."
+echo ""
 
 declare -a docker_compose_paths=(
   "docker-compose"

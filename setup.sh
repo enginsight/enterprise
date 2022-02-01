@@ -45,6 +45,24 @@ eula()
     esac
 }
 
+check_config()
+{
+  if command -v json_pp &> /dev/null
+  then
+    config=$(cat conf/services/config.json)
+    echo ""
+
+    if echo $config | json_pp >/dev/null 2>&1; then
+      echo "Your configuration seems to be correct. Continue..."
+    else
+      echo "Attention! Your configuration seems to be incorrect."
+      echo "Please stick to the JSON format."
+      read -p "If you still want to continue, press Enter."
+    fi
+
+  fi
+}
+
 DEFAULT_APP_URL="http://$(hostname -I | cut -f1 -d ' ')"
 DEFAULT_APP_URL_FILE="./conf/DEFAULT_APP_URL.conf"
 DEFAULT_API_URL="http://$(hostname -I | cut -f1 -d ' '):8080"
@@ -185,8 +203,10 @@ do
     echo $config > $file.production
 done
 
-echo ''
-echo 'Starting initialization...'
-echo ''
+check_config
+
+echo ""
+echo "Starting initialization..."
+echo ""
 
 docker-compose up -d --force-recreate --remove-orphans -V
