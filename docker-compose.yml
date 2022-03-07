@@ -29,7 +29,7 @@ services:
     - mongodb-cves-volume:/data/db
 
   ui-m1:
-    image: registry.enginsight.com/enginsight/ui-m1:3.5.7
+    image: registry.enginsight.com/enginsight/ui-m1:3.5.8
     ports:
     - "80:80"
     restart: always
@@ -37,7 +37,7 @@ services:
     - "./conf/ui-m1/environment.js.production:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: registry.enginsight.com/enginsight/server-m2:3.5.167
+    image: registry.enginsight.com/enginsight/server-m2:3.5.215
     networks:
     - redis
     - mongodb
@@ -52,7 +52,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/server-m2/config.json"
 
   sentinel-m3:
-    image: registry.enginsight.com/enginsight/sentinel-m3:2.19.13
+    image: registry.enginsight.com/enginsight/sentinel-m3:2.19.30
     networks:
     - redis
     - mongodb
@@ -129,7 +129,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/updater-m34/config.json"
 
   generator-m35:
-    image: registry.enginsight.com/enginsight/generator-m35:1.12.28
+    image: registry.enginsight.com/enginsight/generator-m35:1.12.29
     networks:
     - redis
     - mongodb
