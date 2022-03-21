@@ -29,7 +29,7 @@ services:
     - mongodb-cves-volume:/data/db
 
   sentinel-m3:
-    image: registry.enginsight.com/enginsight/sentinel-m3:2.19.30
+    image: registry.enginsight.com/enginsight/sentinel-m3:2.19.35
     networks:
     - redis
     - mongodb
