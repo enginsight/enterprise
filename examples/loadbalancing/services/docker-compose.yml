@@ -118,7 +118,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/generator-m35/config.json"
 
   historian-m38:
-    image: registry.enginsight.com/enginsight/historian-m38:2.1.34
+    image: registry.enginsight.com/enginsight/historian-m38:2.1.35
     networks:
     - redis
     - mongodb
