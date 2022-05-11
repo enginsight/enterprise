@@ -90,7 +90,7 @@ eula()
         ;;
 
     *)
-        print 'Unexpected input. Abort...'
+        echo 'Unexpected input. Abort...'
         exit 1
         ;;
 
