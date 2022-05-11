@@ -1,5 +1,57 @@
 #!/bin/bash
 
+response=""
+
+function show_error () {
+  echo "       Computer says no!"
+  echo "             /"
+  echo "        ________"
+  echo "       |       .|"
+  echo "       |  NO!  .|"
+  echo "       |       .|"
+  echo "       |________|"
+  echo "       __|___|__"
+  echo " _____|_________|____"
+  echo "                    _|"
+  echo "                   |"
+  echo "                   |"
+  echo "                   |"
+  echo " ________________  |"
+  echo "                 |_|"
+  echo ""
+  echo ""
+}
+
+function download () {
+  response=$(wget -qO- $1 2>/dev/null || curl -qf $1 2>/dev/null)
+  exit_code=$?
+
+  if ! [ $exit_code == 0 ]; then
+    show_error
+
+    echo "Can not download latest versions. Check your internet connection!"
+    exit 1
+  fi
+}
+
+function update () {
+  echo "Update Enginsight Enterprise Setup..."
+
+  download "https://raw.githubusercontent.com/enginsight/enterprise/master/setup.sh"
+
+  echo "$response" > ./setup.sh
+
+  chmod +x ./setup.sh
+
+  ./setup.sh "update"
+
+  exit 0
+}
+
+if ! [ "$1" = "update" ]; then
+  update
+fi
+
 echo ""
 echo "    █      Enginsight Enterprise Setup v2.0"
 echo "  █ █   █  "
@@ -89,16 +141,19 @@ fi
 
 if [ "$EUID" -ne 0 ]; then
     echo "Please run as root"
+    show_error
     exit 1
 fi
 
 if ! type "docker" > /dev/null; then
     echo 'Error: docker is not installed.' >&2
+    show_error
     exit 1
 fi
 
 if ! type "docker-compose" > /dev/null; then
     echo 'Error: docker-compose is not installed.' >&2
+    show_error
     exit 1
 fi
 
@@ -128,6 +183,7 @@ fi
 
 if [[ ! $MONGODB_URI == *"replicaSet"* ]]; then
     echo "Invalid MongoDB URI"
+    show_error
     exit 1
 fi
 
@@ -144,6 +200,7 @@ fi
 
 if [[ ! $REDIS_URI == *"redis://"* ]]; then
     echo "Invalid Redis URI"
+    show_error
     exit 1
 fi
 
@@ -160,6 +217,7 @@ fi
 
 if [[ ! $APP_URL == *"http"* ]]; then
     echo "Invalid APP URL"
+    show_error
     exit 1
 fi
 
@@ -176,6 +234,7 @@ fi
 
 if [[ ! $API_URL == *"http"* ]]; then
     echo "Invalid APP URL"
+    show_error
     exit 1
 fi
 
