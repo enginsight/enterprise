@@ -82,7 +82,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
-    image: registry.enginsight.com/enginsight/scheduler-m29:1.8.9
+    image: registry.enginsight.com/enginsight/scheduler-m29:1.8.5
     networks:
     - redis
     - mongodb
