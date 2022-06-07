@@ -65,7 +65,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: registry.enginsight.com/enginsight/reporter-m4:1.18.57
+    image: registry.enginsight.com/enginsight/reporter-m4:2.2.14
     networks:
     - redis
     - mongodb
@@ -105,7 +105,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
-    image: registry.enginsight.com/enginsight/scheduler-m29:1.8.5
+    image: registry.enginsight.com/enginsight/scheduler-m29:1.8.7
     networks:
     - redis
     - mongodb
@@ -129,7 +129,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/updater-m34/config.json"
 
   generator-m35:
-    image: registry.enginsight.com/enginsight/generator-m35:1.12.29
+    image: registry.enginsight.com/enginsight/generator-m35:1.12.33
     networks:
     - redis
     - mongodb
