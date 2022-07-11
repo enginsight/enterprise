@@ -153,7 +153,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/historian-m38/config.json"
 
   themis-m43:
-    image: registry.enginsight.com/enginsight/themis-m43:1.17.15
+    image: registry.enginsight.com/enginsight/themis-m43:1.18.20
     networks:
     - redis
     - mongodb
