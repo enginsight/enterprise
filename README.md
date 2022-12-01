@@ -6,8 +6,6 @@ access all Enginsight functions remotely on your server.
 For more information regarding the Enterprise solution? Visit [enginsight.com](https://enginsight.com/en/on-premises/) or visit our website in [German](https://enginsight.com/de/on-premises/).
 
 ## Documentation
-For the installation guide, system requirements and more visit our [documentation](https://enginsight.com/docs/v/master/licenses/on-premises).
-For the German version click [here](https://enginsight.com/docs/lizenzen/on-premise/installationsanleitung).
-
+For the installation guide, system requirements and more visit our [documentation](https://enginsight.com/docs/on-premises/anforderungen).
 
 If you have any questions feel free to contact us at support@enginsight.com. Our communication channels are always open to your questions and concerns. 
