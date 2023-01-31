@@ -10,13 +10,13 @@ services:
     - mongodb-cves-volume:/data/db
 
   sentinel-m3:
-    image: registry.enginsight.com/enginsight/sentinel-m3:2.20.9
+    image: registry.enginsight.com/enginsight/sentinel-m3:2.21.28
     restart: always
     volumes:
     - "./conf/services/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: registry.enginsight.com/enginsight/reporter-m4:2.3.53
+    image: registry.enginsight.com/enginsight/reporter-m4:2.4.47
     networks:
     - mongodb-cves
     depends_on:
