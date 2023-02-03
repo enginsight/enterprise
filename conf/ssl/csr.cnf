@@ -1,0 +1,20 @@
+default_bits = 4096
+default_md = sha256
+distinguished_name = req_dn
+req_extensions = v3_req
+
+[v3_req]
+subjectKeyIdentifier  = hash
+basicConstraints = CA:FALSE
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage  = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = <mongodHostname>
+IP.1  = <mongodIP>
+
+[req_dn]
+countryName = DE
+organizationName = Enginsight
+commonName = enginsight.com
