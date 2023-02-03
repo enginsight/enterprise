@@ -25,3 +25,6 @@ openssl x509 -sha256 -req -days 3650 -passin pass:$(echo ${passwd}) -in mongodb.
 
 # concat key and certificate for /etc/mongod.conf.
 cat mongodb.key mongodb.crt > mongodb.pem
+
+# add restrictive permissions to all keys.
+chmod 400 *.key
