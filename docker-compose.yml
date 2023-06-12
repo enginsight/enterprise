@@ -29,7 +29,7 @@ services:
     - mongodb-cves-volume:/data/db
 
   ui-m1:
-    image: registry.enginsight.com/enginsight/ui-m1:5.1.1
+    image: registry.enginsight.com/enginsight/ui-m1:5.2.5
     ports:
     - "80:80"
     restart: always
@@ -49,10 +49,11 @@ services:
     - mongodb-setup
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/server-m2/config.json"
 
   sentinel-m3:
-    image: registry.enginsight.com/enginsight/sentinel-m3:2.23.21
+    image: registry.enginsight.com/enginsight/sentinel-m3:2.23.25
     networks:
     - redis
     - mongodb
@@ -62,10 +63,11 @@ services:
     - mongodb-setup
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: registry.enginsight.com/enginsight/reporter-m4:2.6.15
+    image: registry.enginsight.com/enginsight/reporter-m4:2.6.28
     networks:
     - redis
     - mongodb
@@ -76,6 +78,7 @@ services:
     - mongodb-cves
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/reporter-m4/config.json"
 
   profiler-m22:
@@ -89,6 +92,7 @@ services:
     - mongodb-setup
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/profiler-m22/config.json"
 
   anomalies-m28:
@@ -102,6 +106,7 @@ services:
     - mongodb-setup
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/anomalies-m28/config.json"
 
   scheduler-m29:
@@ -114,6 +119,7 @@ services:
     - mongodb-setup
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/scheduler-m29/config.json"
 
   updater-m34:
@@ -126,6 +132,7 @@ services:
     - redis
     - mongodb-setup
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/updater-m34/config.json"
 
   generator-m35:
@@ -138,6 +145,7 @@ services:
     - mongodb-setup
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/generator-m35/config.json"
 
   historian-m38:
@@ -150,6 +158,7 @@ services:
     - mongodb-setup
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/historian-m38/config.json"
 
   themis-m43:
@@ -162,6 +171,7 @@ services:
     - mongodb-setup
     restart: always
     volumes:
+#    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/themis-m43/config.json"
   redis:
     image: redis:4-alpine
