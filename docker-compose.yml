@@ -37,7 +37,7 @@ services:
     - "./conf/ui-m1/environment.js.production:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: registry.enginsight.com/enginsight/server-m2:5.3.21
+    image: registry.enginsight.com/enginsight/server-m2:5.3.47
     networks:
     - redis
     - mongodb
