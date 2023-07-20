@@ -99,19 +99,18 @@ eula()
 
 check_config()
 {
-  if command -v json_pp &> /dev/null
-  then
-    config=$(cat conf/services/config.json)
+  if command -v json_pp &> /dev/null; then
+    config=$(cat conf/services/config.json.production)
     echo ""
 
     if echo $config | json_pp >/dev/null 2>&1; then
       echo "Your configuration seems to be correct. Continue..."
+      echo $config | json_pp > "conf/services/config.json.production"
     else
       echo "Attention! Your configuration seems to be incorrect."
       echo "Please stick to the JSON format."
       read -p "If you still want to continue, press Enter."
     fi
-
   fi
 }
 
@@ -131,18 +130,19 @@ DEFAULT_JWT_SECRET_FILE="./conf/DEFAULT_JWT_SECRET.conf"
 ACCPETED_EULA="false"
 ACCPETED_EULA_FILE="./conf/ACCEPTED_EULA.conf"
 
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root"
+    echo ""
+    show_error
+    exit 1
+fi
+
 if [ -s $ACCPETED_EULA_FILE ]; then
     ACCPETED_EULA=$(cat $ACCPETED_EULA_FILE)
 fi
 
 if [[ "$ACCPETED_EULA" != "true" ]]; then
   eula
-fi
-
-if [ "$EUID" -ne 0 ]; then
-    echo "Please run as root"
-    show_error
-    exit 1
 fi
 
 if ! type "docker" > /dev/null; then

@@ -5,6 +5,7 @@
     }
   },
   "api": {
+    "url": "%%API_URL%%",
     "port": 8080,
     "timeout": 5000,
     "clientMaxBodySize": "50mb",
