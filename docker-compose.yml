@@ -29,7 +29,7 @@ services:
     - mongodb-cves-volume:/data/db
 
   ui-m1:
-    image: registry.enginsight.com/enginsight/ui-m1:6.6.3
+    image: registry.enginsight.com/enginsight/ui-m1:6.6.4
     ports:
     - "80:80"
     restart: always
