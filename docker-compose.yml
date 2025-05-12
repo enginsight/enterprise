@@ -28,7 +28,7 @@ services:
     - mongodb-cves-volume:/data/db
 
   ui-m1:
-    image: registry.enginsight.com/enginsight/ui-m1:7.0.11
+    image: registry.enginsight.com/enginsight/ui-m1:7.3.0
     ports:
     - "80:80"
     restart: always
@@ -36,7 +36,7 @@ services:
     - "./conf/ui-m1/environment.js.production:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: registry.enginsight.com/enginsight/server-m2:7.1.0
+    image: registry.enginsight.com/enginsight/server-m2:7.3.7
     networks:
     - redis
     - mongodb
@@ -66,7 +66,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: registry.enginsight.com/enginsight/reporter-m4:3.1.76
+    image: registry.enginsight.com/enginsight/reporter-m4:3.1.91
     networks:
     - redis
     - mongodb
@@ -122,7 +122,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/scheduler-m29/config.json"
 
   updater-m34:
-    image: registry.enginsight.com/enginsight/updater-m34:2.3.63
+    image: registry.enginsight.com/enginsight/updater-m34:2.3.67
     restart: always
     networks:
     - redis
@@ -161,7 +161,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/historian-m38/config.json"
 
   themis-m43:
-    image: registry.enginsight.com/enginsight/themis-m43:2.0.58
+    image: registry.enginsight.com/enginsight/themis-m43:2.0.70
     networks:
     - redis
     - mongodb
