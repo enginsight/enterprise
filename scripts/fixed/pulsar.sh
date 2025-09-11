@@ -95,6 +95,7 @@ files=(
 # Loop through the list of files and download each one using wget
 for file in "${files[@]}"; do
     echo "Downloading $file..."
-    curl --create-dirs -o "pulsar/$file" "${base_url}${file}" --progress-bar
+    encoded_file=$(printf '%s' "$file" | sed 's/ /%20/g')
+    curl --create-dirs -o "pulsar/$file" "${base_url}${encoded_file}" --progress-bar
     echo ""
 done
