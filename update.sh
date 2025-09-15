@@ -128,7 +128,7 @@ do
       # Update server-m2 and also server-m2-N (numbered variants)
       # BusyBox/GNU sed compatible
       sed -i -e "s|\(/server-m2\(-[0-9]\+\)\?:\)[0-9]\+\.[0-9]\+\.[0-9]\+|\1$latest|g" ./docker-compose.yml
-      printf "%16s %8s %8s\n" "server-m2(+variants):" "$latest" "Is now latest version!"
+      printf "%16s %8s %8s\n" "server-m2:" "$latest" "Is now latest version!"
     else
       sed -i -e "s|\(/$service:\)[0-9]\+\.[0-9]\+\.[0-9]\+|\1$latest|g" ./docker-compose.yml
       printf "%16s %8s %8s\n" "$service:" "$latest" "Is now latest version!"
