@@ -1,24 +1,5 @@
 version: "3"
 services:
-  mongodb:
-    image: mongo:4-xenial
-    restart: always
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
-    networks:
-    - mongodb
-    volumes:
-    - mongodb-volume:/data/db
-
-  mongodb-setup:
-    image: mongo:4-xenial
-    depends_on:
-    - mongodb
-    networks:
-    - mongodb
-    volumes:
-    - ./scripts:/scripts
-    entrypoint: ["sh", "/scripts/mongodb/initiate.sh"]
-
   mongodb-cves:
     image: mongo:4
     networks:
@@ -39,13 +20,10 @@ services:
     image: registry.enginsight.com/enginsight/server-m2:7.9.8
     networks:
     - redis
-    - mongodb
     ports:
     - "8080:8080"
     depends_on:
     - redis
-    - mongodb
-    - mongodb-setup
     restart: always
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
@@ -55,11 +33,8 @@ services:
     image: registry.enginsight.com/enginsight/sentinel-m3:3.0.7
     networks:
     - redis
-    - mongodb
     depends_on:
     - redis
-    - mongodb
-    - mongodb-setup
     restart: always
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
@@ -69,11 +44,9 @@ services:
     image: registry.enginsight.com/enginsight/reporter-m4:3.2.9
     networks:
     - redis
-    - mongodb
     - mongodb-cves
     depends_on:
     - redis
-    - mongodb-setup
     - mongodb-cves
     restart: always
     volumes:
@@ -84,11 +57,8 @@ services:
     image: registry.enginsight.com/enginsight/profiler-m22:2.2.17
     networks:
     - redis
-    - mongodb
     depends_on:
     - redis
-    - mongodb
-    - mongodb-setup
     restart: always
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
@@ -98,11 +68,8 @@ services:
     image: registry.enginsight.com/enginsight/anomalies-m28:2.3.0
     networks:
     - redis
-    - mongodb
     depends_on:
     - redis
-    - mongodb
-    - mongodb-setup
     restart: always
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
@@ -112,10 +79,8 @@ services:
     image: registry.enginsight.com/enginsight/scheduler-m29:1.12.27
     networks:
     - redis
-    - mongodb
     depends_on:
     - redis
-    - mongodb-setup
     restart: always
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
@@ -126,10 +91,8 @@ services:
     restart: always
     networks:
     - redis
-    - mongodb
     depends_on:
     - redis
-    - mongodb-setup
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/updater-m34/config.json"
@@ -138,10 +101,8 @@ services:
     image: registry.enginsight.com/enginsight/generator-m35:1.15.34
     networks:
     - redis
-    - mongodb
     depends_on:
     - redis
-    - mongodb-setup
     restart: always
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
@@ -151,10 +112,8 @@ services:
     image: registry.enginsight.com/enginsight/historian-m38:2.3.8
     networks:
     - redis
-    - mongodb
     depends_on:
     - redis
-    - mongodb-setup
     restart: always
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
@@ -164,14 +123,13 @@ services:
     image: registry.enginsight.com/enginsight/themis-m43:2.1.47
     networks:
     - redis
-    - mongodb
     depends_on:
     - redis
-    - mongodb-setup
     restart: always
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/themis-m43/config.json"
+    
   redis:
     image: redis:5-alpine
     command: [sh, -c, "rm -f /data/dump.rdb && redis-server"]
@@ -180,10 +138,8 @@ services:
     restart: always
 
 networks:
-  mongodb:
   redis:
   mongodb-cves:
 
 volumes:
-  mongodb-volume:
   mongodb-cves-volume:
