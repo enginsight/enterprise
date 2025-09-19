@@ -69,12 +69,12 @@ if ! [ "${1-}" = "update" ]; then
 fi
 
 echo ""
-echo "    █      Enginsight Auto-Updater"
-echo "  █ █   █  "
+echo "      █    Enginsight Auto-Updater"
+echo "  █   █ █  "
 echo "  █ █ █ █  Enginsight GmbH"
 echo "  █ █ █ █  Leutragraben 1, 07743 Jena"
-echo "  █   █ █  Geschäftsführer: Mario Jandeck, Eric Range"
-echo "      █    "
+echo "  █ █   █  Geschäftsführer: Mario Jandeck, Eric Range"
+echo "    █      "
 echo ""
 
 # Pull reference compose to determine latest tags
