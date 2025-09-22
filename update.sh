@@ -154,7 +154,7 @@ detect_compose() {
     COMPOSE_MODE="v2"
     return 0
   fi
-  
+
   # Explicit /usr/bin/docker (in case PATH is restricted)
   if [ -x /usr/bin/docker ] && /usr/bin/docker compose version >/dev/null 2>&1; then
     DOCKER_BIN="/usr/bin/docker"

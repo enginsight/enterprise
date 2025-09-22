@@ -5,8 +5,6 @@ services:
     networks:
     - mongodb-cves
     restart: always
-    volumes:
-    - mongodb-cves-volume:/data/db
 
   ui-m1:
     image: registry.enginsight.com/enginsight/ui-m1:7.9.0
@@ -129,7 +127,7 @@ services:
     volumes:
 #    - "./conf/ssl/:/etc/enginsight/ssl/"
     - "./conf/services/config.json.production:/etc/enginsight/themis-m43/config.json"
-    
+
   redis:
     image: redis:5-alpine
     command: [sh, -c, "rm -f /data/dump.rdb && redis-server"]
@@ -140,6 +138,3 @@ services:
 networks:
   redis:
   mongodb-cves:
-
-volumes:
-  mongodb-cves-volume:
