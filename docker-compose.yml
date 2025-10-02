@@ -7,7 +7,7 @@ services:
     restart: always
 
   ui-m1:
-    image: registry.enginsight.com/enginsight/ui-m1:7.9.10
+    image: registry.enginsight.com/enginsight/ui-m1:7.9.13
     ports:
     - "80:80"
     restart: always
