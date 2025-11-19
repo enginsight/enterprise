@@ -53,7 +53,7 @@ if ! [ "$1" = "update" ]; then
 fi
 
 echo ""
-echo "      █    Enginsight Auto-Updater"
+echo "      █    Enginsight Enterprise Setup v2.0"
 echo "  █   █ █  "
 echo "  █ █ █ █  Enginsight GmbH"
 echo "  █ █ █ █  Leutragraben 1, 07743 Jena"
