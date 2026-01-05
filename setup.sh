@@ -86,7 +86,7 @@ eula()
     case ${answer:0:1} in
     y|Y|j )
         # Write value to file.
-        echo "true" > $ACCPETED_EULA_FILE
+        echo "true" > $ACCEPTED_EULA_FILE
         ;;
 
     *)
@@ -127,8 +127,8 @@ DEFAULT_REDIS_URI_FILE="./conf/DEFAULT_REDIS_URI.conf"
 
 DEFAULT_JWT_SECRET_FILE="./conf/DEFAULT_JWT_SECRET.conf"
 
-ACCPETED_EULA="false"
-ACCPETED_EULA_FILE="./conf/ACCEPTED_EULA.conf"
+ACCEPTED_EULA="false"
+ACCEPTED_EULA_FILE="./conf/ACCEPTED_EULA.conf"
 
 if [ "$EUID" -ne 0 ]; then
     echo "Please run as root"
@@ -137,11 +137,11 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-if [ -s $ACCPETED_EULA_FILE ]; then
-    ACCPETED_EULA=$(cat $ACCPETED_EULA_FILE)
+if [ -s $ACCEPTED_EULA_FILE ]; then
+    ACCEPTED_EULA=$(cat $ACCEPTED_EULA_FILE)
 fi
 
-if [[ "$ACCPETED_EULA" != "true" ]]; then
+if [[ "$ACCEPTED_EULA" != "true" ]]; then
   eula
 fi
 
@@ -151,7 +151,11 @@ if ! type "docker" > /dev/null; then
     exit 1
 fi
 
-if ! type "docker-compose" > /dev/null; then
+if docker compose version > /dev/null 2>&1; then
+    DOCKER_COMPOSE=(docker compose)
+elif type "docker-compose" > /dev/null 2>&1; then
+    DOCKER_COMPOSE=(docker-compose)
+else
     echo 'Error: docker-compose is not installed.' >&2
     show_error
     exit 1
@@ -268,4 +272,4 @@ echo ""
 echo "Starting initialization..."
 echo ""
 
-docker-compose up -d --force-recreate --remove-orphans -V
+"${DOCKER_COMPOSE[@]}" up -d --force-recreate --remove-orphans -V
