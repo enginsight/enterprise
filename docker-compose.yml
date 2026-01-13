@@ -7,7 +7,7 @@ services:
     restart: always
 
   ui-m1:
-    image: registry.enginsight.com/enginsight/ui-m1:7.12.6
+    image: registry.enginsight.com/enginsight/ui-m1:7.12.8
     ports:
     - "80:80"
     restart: always
@@ -15,7 +15,7 @@ services:
     - "./conf/ui-m1/environment.js.production:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: registry.enginsight.com/enginsight/server-m2:7.12.0
+    image: registry.enginsight.com/enginsight/server-m2:7.12.51
     networks:
     - redis
     ports:
