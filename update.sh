@@ -64,7 +64,12 @@ check_config()
   fi
 }
 
-if ! [ "${1-}" = "update" ]; then
+AIRGAP=false
+if [[ -f "./airgap.versions" ]]; then
+    AIRGAP=true
+fi
+
+if [[ "$AIRGAP" != "true" ]] && ! [ "${1-}" = "update" ]; then
   update
 fi
 
@@ -77,8 +82,16 @@ echo "  █ █   █  Geschäftsführer: Mario Jandeck, Eric Range"
 echo "    █      "
 echo ""
 
-# Pull reference compose to determine latest tags
-download "https://raw.githubusercontent.com/enginsight/enterprise/master/docker-compose.yml"
+if [[ "$AIRGAP" == "true" ]]; then
+    echo "  [Airgap Mode] airgap.versions detected."
+    echo "  Internet access disabled. To update, use: ./setup.sh import <archive>"
+    echo ""
+fi
+
+# Pull reference compose to determine latest tags (skip in airgap mode)
+if [[ "$AIRGAP" != "true" ]]; then
+  download "https://raw.githubusercontent.com/enginsight/enterprise/master/docker-compose.yml"
+fi
 
 # Ensure local compose exists (avoid partial edits)
 if ! [ -f ./docker-compose.yml ]; then
@@ -117,22 +130,33 @@ declare -a services=(
   "themis-m43"
 )
 
-# Update tags in local compose based on latest tags found in reference compose
+# Update tags in local compose based on latest tags
 for service in "${services[@]}"
 do
-  regex="/$service:([0-9]+\.[0-9]+\.[0-9]+)"
-  if [[ $response =~ $regex ]]; then
-    latest="${BASH_REMATCH[1]}"
+  latest=""
 
-    if [[ "$service" == "server-m2" ]]; then
-      # Update server-m2 and also server-m2-N (numbered variants)
-      # BusyBox/GNU sed compatible
-      sed -i -e "s|\(/server-m2\(-[0-9]\+\)\?:\)[0-9]\+\.[0-9]\+\.[0-9]\+|\1$latest|g" ./docker-compose.yml
-      printf "%16s %8s %8s\n" "server-m2:" "$latest" "Is now latest version!"
+  if [[ "$AIRGAP" == "true" ]]; then
+    # Read version from airgap.versions file
+    latest=$(grep "^${service}:" ./airgap.versions | head -1 | cut -d: -f2 || true)
+    [[ -z "$latest" ]] && continue
+  else
+    # Extract from downloaded reference compose
+    regex="/$service:([0-9]+\.[0-9]+\.[0-9]+)"
+    if [[ $response =~ $regex ]]; then
+      latest="${BASH_REMATCH[1]}"
     else
-      sed -i -e "s|\(/$service:\)[0-9]\+\.[0-9]\+\.[0-9]\+|\1$latest|g" ./docker-compose.yml
-      printf "%16s %8s %8s\n" "$service:" "$latest" "Is now latest version!"
+      continue
     fi
+  fi
+
+  if [[ "$service" == "server-m2" ]]; then
+    # Update server-m2 and also server-m2-N (numbered variants)
+    # BusyBox/GNU sed compatible
+    sed -i -e "s|\(/server-m2\(-[0-9]\+\)\?:\)[0-9]\+\.[0-9]\+\.[0-9]\+|\1$latest|g" ./docker-compose.yml
+    printf "%16s %8s %8s\n" "server-m2:" "$latest" "Is now latest version!"
+  else
+    sed -i -e "s|\(/$service:\)[0-9]\+\.[0-9]\+\.[0-9]\+|\1$latest|g" ./docker-compose.yml
+    printf "%16s %8s %8s\n" "$service:" "$latest" "Is now latest version!"
   fi
 done
 
@@ -200,15 +224,20 @@ if ! detect_compose; then
   exit 1
 fi
 
-echo "Pulling images (compose pull)..."
-if ! compose pull; then
-  show_error
-  echo "compose pull failed. Reverting docker-compose.yml..."
-  mv -f "$backup_file" ./docker-compose.yml
-  exit 1
+if [[ "$AIRGAP" == "true" ]]; then
+  echo "Airgap mode: skipping image pull (images already loaded)."
+else
+  echo "Pulling images (compose pull)..."
+  if ! compose pull; then
+    show_error
+    echo "compose pull failed. Reverting docker-compose.yml..."
+    mv -f "$backup_file" ./docker-compose.yml
+    exit 1
+  fi
+  echo "Images pulled successfully."
 fi
 
-echo "Images pulled successfully. Starting containers..."
+echo "Starting containers..."
 if compose up -d --force-recreate --remove-orphans -V; then
   echo "Update completed successfully."
   exit 0

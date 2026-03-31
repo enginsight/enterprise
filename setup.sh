@@ -48,7 +48,12 @@ function update () {
   exit 0
 }
 
-if ! [ "$1" = "update" ]; then
+AIRGAP=false
+if [[ -f "./airgap.versions" ]]; then
+    AIRGAP=true
+fi
+
+if [[ "$AIRGAP" != "true" ]] && ! [ "$1" = "update" ]; then
   update
 fi
 
@@ -60,6 +65,12 @@ echo "  █ █ █ █  Leutragraben 1, 07743 Jena"
 echo "  █ █   █  Geschäftsführer: Mario Jandeck, Eric Range"
 echo "    █      "
 echo ""
+
+if [[ "$AIRGAP" == "true" ]]; then
+    echo "  [Airgap Mode] airgap.versions detected."
+    echo "  Internet access disabled. To update, use: ./setup.sh import <archive>"
+    echo ""
+fi
 
 eula()
 {
