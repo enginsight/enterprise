@@ -227,6 +227,13 @@ fi
 if [[ "$AIRGAP" == "true" ]]; then
   echo "Airgap mode: skipping image pull (images already loaded)."
 else
+  # Random delay to spread registry load
+  if ! [ -t 0 ]; then
+    delay=$((RANDOM % 3600))
+    echo "Waiting ${delay}s to spread load..."
+    sleep "$delay"
+  fi
+
   echo "Pulling images (compose pull)..."
   if ! compose pull; then
     show_error
