@@ -15,7 +15,7 @@ services:
     - "./conf/ui-m1/environment.js.production:/opt/enginsight/ui-m1/config/environment.js"
 
   server-m2:
-    image: registry.enginsight.com/enginsight/server-m2:7.15.50
+    image: registry.enginsight.com/enginsight/server-m2:7.15.54
     networks:
     - redis
     ports:
@@ -39,7 +39,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/sentinel-m3/config.json"
 
   reporter-m4:
-    image: registry.enginsight.com/enginsight/reporter-m4:3.4.10
+    image: registry.enginsight.com/enginsight/reporter-m4:3.5.0
     networks:
     - redis
     - mongodb-cves
@@ -118,7 +118,7 @@ services:
     - "./conf/services/config.json.production:/etc/enginsight/historian-m38/config.json"
 
   themis-m43:
-    image: registry.enginsight.com/enginsight/themis-m43:2.2.10
+    image: registry.enginsight.com/enginsight/themis-m43:2.2.21
     networks:
     - redis
     depends_on:
