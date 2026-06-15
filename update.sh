@@ -244,6 +244,8 @@ else
   echo "Images pulled successfully."
 fi
 
+compose rm -sfv mongodb-cves >/dev/null 2>&1 || true
+
 echo "Starting containers..."
 if compose up -d --force-recreate --remove-orphans -V; then
   echo "Update completed successfully."
