@@ -128,12 +128,24 @@ declare -a services=(
   "generator-m35"
   "historian-m38"
   "themis-m43"
+  "@redis"
 )
 
 # Update tags in local compose based on latest tags
 for service in "${services[@]}"
 do
   latest=""
+
+  # "@name" = public image ("image: name:<tag>", no registry prefix / semver tag),
+  if [[ "$service" == @* ]]; then
+    name="${service#@}"
+    regex="image: ${name}:([^[:space:]]+)"
+    [[ $response =~ $regex ]] && latest="${BASH_REMATCH[1]}"
+    [[ -z "$latest" ]] && continue
+    sed -i -e "s|\(image: ${name}:\)[^[:space:]]*|\1$latest|g" ./docker-compose.yml
+    printf "%16s %8s %8s\n" "${name}:" "$latest" "Is now latest version!"
+    continue
+  fi
 
   if [[ "$AIRGAP" == "true" ]]; then
     # Read version from airgap.versions file
