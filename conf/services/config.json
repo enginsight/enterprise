@@ -4,6 +4,7 @@
       "enabled": false
     }
   },
+  "associatedCompanyId": "%%ASSOCIATED_COMPANY_ID%%",
   "api": {
     "url": "%%API_URL%%",
     "port": 8080,

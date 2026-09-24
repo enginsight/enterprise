@@ -138,6 +138,9 @@ DEFAULT_REDIS_URI_FILE="./conf/DEFAULT_REDIS_URI.conf"
 
 DEFAULT_JWT_SECRET_FILE="./conf/DEFAULT_JWT_SECRET.conf"
 
+DEFAULT_ASSOCIATED_COMPANY_ID=""
+DEFAULT_ASSOCIATED_COMPANY_ID_FILE="./conf/DEFAULT_ASSOCIATED_COMPANY_ID.conf"
+
 ACCEPTED_EULA="false"
 ACCEPTED_EULA_FILE="./conf/ACCEPTED_EULA.conf"
 
@@ -255,17 +258,44 @@ fi
 
 # Write value to file.
 echo $API_URL > $DEFAULT_API_URL_FILE
+
+VALUES=("MONGODB_URI" "REDIS_URI" "APP_URL" "API_URL" "JWT_SECRET")
+
+# Only asked when config.json has the placeholder. Existing installations add it manually.
+if grep -q "%%ASSOCIATED_COMPANY_ID%%" ./conf/services/config.json; then
+    if [ -s $DEFAULT_ASSOCIATED_COMPANY_ID_FILE ]; then
+        DEFAULT_ASSOCIATED_COMPANY_ID=$(cat $DEFAULT_ASSOCIATED_COMPANY_ID_FILE)
+    fi
+
+    # Optional, so an empty value is valid and "docker" mode must not stop to ask.
+    if [[ $1 == "docker" ]]; then
+        ASSOCIATED_COMPANY_ID=$DEFAULT_ASSOCIATED_COMPANY_ID
+    else
+        read -p "Enter Associated Company ID, optional ($DEFAULT_ASSOCIATED_COMPANY_ID) : " ASSOCIATED_COMPANY_ID && ASSOCIATED_COMPANY_ID=${ASSOCIATED_COMPANY_ID:-$DEFAULT_ASSOCIATED_COMPANY_ID}
+    fi
+
+    if [[ -n $ASSOCIATED_COMPANY_ID && ! $ASSOCIATED_COMPANY_ID =~ ^[0-9]+$ ]]; then
+        echo "Invalid Associated Company ID"
+        show_error
+        exit 1
+    fi
+
+    # Write value to file.
+    echo $ASSOCIATED_COMPANY_ID > $DEFAULT_ASSOCIATED_COMPANY_ID_FILE
+
+    VALUES+=("ASSOCIATED_COMPANY_ID")
+fi
 echo ""
 
 # Show values in a table.
-for val in "MONGODB_URI" "REDIS_URI" "APP_URL" "API_URL" "JWT_SECRET"; do printf "%12s %s\n" "$val:" "${!val}"; done
+for val in "${VALUES[@]}"; do printf "%22s %s\n" "$val:" "${!val}"; done
 
 # Go through all config files...
 for file in $(find ./conf/* -maxdepth 10 -name "*.json" -o -name "*.js")
 do
     config=$(<$file)
 
-    for name in "MONGODB_URI" "REDIS_URI" "APP_URL" "API_URL" "JWT_SECRET"; do
+    for name in "${VALUES[@]}"; do
         # Sanitize invalid json characters.
         value=$(echo ${!name} | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
 
