@@ -37,7 +37,7 @@ function download () {
 function update () {
   echo "Update Enginsight Enterprise Setup..."
 
-  download "https://raw.githubusercontent.com/enginsight/enterprise/master/setup.sh"
+  download "https://get.enginsight.com/on-premises/setup.sh"
 
   echo "$response" > ./setup.sh
 

@@ -25,7 +25,7 @@ response=""
 function update () {
   echo "Update Enginsight Auto-Updater..."
 
-  download "https://raw.githubusercontent.com/enginsight/enterprise/master/update.sh"
+  download "https://get.enginsight.com/on-premises/update.sh"
 
   echo "$response" > ./update.sh
 
@@ -90,7 +90,7 @@ fi
 
 # Pull reference compose to determine latest tags (skip in airgap mode)
 if [[ "$AIRGAP" != "true" ]]; then
-  download "https://raw.githubusercontent.com/enginsight/enterprise/master/docker-compose.yml"
+  download "https://get.enginsight.com/on-premises/docker-compose.yml"
 fi
 
 # Ensure local compose exists (avoid partial edits)
