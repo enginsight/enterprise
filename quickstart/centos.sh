@@ -18,12 +18,12 @@ if ! type "docker-compose" > /dev/null; then
   sudo chmod +x "/usr/bin/docker-compose"
 fi
 
-if ! type "git" > /dev/null; then
-  sudo yum install -y git
+if ! type "curl" > /dev/null; then
+  sudo yum install -y curl
 fi
 
-git clone https://github.com/enginsight/enterprise
-cd enterprise
+mkdir -p enterprise && cd enterprise
+curl -fsSL https://get.enginsight.com/on-premises/on-premises.tar.gz | tar -xz --strip-components=1
 
 #clear
 echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
