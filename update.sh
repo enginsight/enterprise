@@ -258,8 +258,36 @@ fi
 
 compose rm -sfv mongodb-cves >/dev/null 2>&1 || true
 
+# 'up -V' gives every recreated container fresh anonymous volumes but leaves
+# the previous ones behind as dangling, which fills the disk over time.
+# Delete anonymous volumes (64-hex names) that no container references. This
+# runs only after the stack is up again, so a failed start never takes the
+# running containers down first. Named volumes are never matched.
+remove_dangling_anon_volumes() {
+  local docker_bin="$DOCKER_BIN" volumes removed
+
+  # DOCKER_BIN is only set for compose v2; resolve it for legacy docker-compose too.
+  if [ -z "$docker_bin" ]; then
+    docker_bin="$(command -v docker 2>/dev/null)"
+    if [ -z "$docker_bin" ] && [ -x /usr/bin/docker ]; then
+      docker_bin="/usr/bin/docker"
+    fi
+  fi
+  [ -n "$docker_bin" ] || return 0
+
+  volumes=$("$docker_bin" volume ls -qf dangling=true 2>/dev/null | grep -E '^[0-9a-f]{64}$')
+  [ -n "$volumes" ] || return 0
+
+  # xargs batches the names, so thousands of leftovers do not exceed the argument limit.
+  removed=$(echo "$volumes" | xargs "$docker_bin" volume rm 2>/dev/null | wc -l)
+  if [ "$((removed))" -gt 0 ]; then
+    echo "Removed $((removed)) unused anonymous volume(s)."
+  fi
+}
+
 echo "Starting containers..."
 if compose up -d --force-recreate --remove-orphans -V; then
+  remove_dangling_anon_volumes
   echo "Update completed successfully."
   exit 0
 else
@@ -267,6 +295,8 @@ else
   echo "compose up failed. Reverting docker-compose.yml..."
   mv -f "$backup_file" ./docker-compose.yml
   echo "Attempting to restore previous stack..."
-  compose up -d --force-recreate --remove-orphans -V || true
+  if compose up -d --force-recreate --remove-orphans -V; then
+    remove_dangling_anon_volumes
+  fi
   exit 1
 fi
